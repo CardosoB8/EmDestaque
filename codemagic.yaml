@@ -1,0 +1,32 @@
+workflows:
+  android-workflow:
+    name: Build Android APK
+    max_build_duration: 60
+    environment:
+      vars:
+        # Se for assinar com keystore:
+        # KEYSTORE_BASE64: Envie o arquivo .jks como base64 ou via UI
+        # KEYSTORE_PASSWORD: $KEYSTORE_PASSWORD
+        # KEY_ALIAS: $KEY_ALIAS
+        # KEY_PASSWORD: $KEY_PASSWORD
+      flutter: false
+      android:
+        gradle_command: assembleDebug
+        build_tools: "30.0.3"
+        ndk: none
+    scripts:
+      - name: Download dependencies
+        script: ./gradlew --no-daemon clean --refresh-dependencies
+      - name: Run unit tests
+        script: ./gradlew testDebugUnitTest
+      - name: Build APK
+        script: ./gradlew assembleDebug
+    artifacts:
+      - app/build/outputs/**/*.apk
+    cache:
+      - gradle
+      - pub  # (caso use Flutter)
+    triggers:
+      - push
+      - pull_request
+      
