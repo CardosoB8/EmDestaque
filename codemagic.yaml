@@ -5,19 +5,24 @@ workflows:
 
     scripts:
       - name: Make Gradlew Executable
-        script: chmod +x gradlew
+        script: |
+          chmod +x gradlew
 
       - name: Clean
-        script: ./gradlew clean
+        script: |
+          ./gradlew clean
 
       - name: Build Debug APK
-        script: ./gradlew assembleDebug
+        script: |
+          ./gradlew assembleDebug
 
-      - name: Find generated APKs
-        script: find . -type f -name "*.apk"
+      - name: List generated APKs
+        script: |
+          echo ">> APKs gerados:"
+          find . -type f -name "*.apk"
 
     artifacts:
-      # ajuste este caminho para bater com o que o `find` te mostrou
+      # ajuste este padrão ao caminho que o `find` mostrar
       - app/build/outputs/apk/debug/*.apk
 
     publishing:
