@@ -3,11 +3,10 @@ workflows:
     name: Build Android App
     max_build_duration: 20
     environment:
+      java: 17
+      android: 34
       vars:
         PACKAGE_NAME: "com.seuprojeto.nome"
-      java: 17
-      android: 
-        sdk: 34
     scripts:
       - name: Permitir execução do Gradle Wrapper
         script: chmod +x ./gradlew
