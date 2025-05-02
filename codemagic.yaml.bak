@@ -2,8 +2,7 @@ workflows:
   android-workflow:
     name: Android Build
     max_build_duration: 45
-    environment:
-      vars:
+    
         # Você pode definir variáveis personalizadas aqui se quiser
       android_signing:
         - my_keystore

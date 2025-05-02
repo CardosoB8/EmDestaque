@@ -2,15 +2,12 @@ workflows:
   android-workflow:
     name: Android Build
     max_build_duration: 45
-    
-        # Você pode definir variáveis personalizadas aqui se quiser
-      android_signing:
-        - my_keystore
     scripts:
       - name: Clean
         script: ./gradlew clean
-      - name: Build APK
-        script: ./gradlew assembleRelease
+      - name: Build Debug APK
+        # gera APK de debug, já assinado com a chave default do Android Studio
+        script: ./gradlew assembleDebug
     artifacts:
       - app/build/outputs/**/*.apk
     publishing:
