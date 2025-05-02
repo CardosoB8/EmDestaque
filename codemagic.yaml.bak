@@ -4,13 +4,12 @@ workflows:
     max_build_duration: 20
     environment:
       java: 17
-      android: 34
       vars:
         PACKAGE_NAME: "com.my.newproject9"
     scripts:
       - name: Permitir execução do Gradle Wrapper
         script: chmod +x ./gradlew
-      - name: Clean
+      - name: Limpar build anterior
         script: ./gradlew clean
       - name: Build APK de debug
         script: ./gradlew assembleDebug
