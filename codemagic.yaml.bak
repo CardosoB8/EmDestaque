@@ -1,15 +1,20 @@
 workflows:
   android-workflow:
-    name: Build Android APK
+    name: Android Build
+    max_build_duration: 45
     environment:
       vars:
-        
+        # Você pode definir variáveis personalizadas aqui se quiser
+      android_signing:
+        - my_keystore
     scripts:
-      - name: Make Gradle executable
-        script: chmod +x ./gradlew
       - name: Clean
         script: ./gradlew clean
       - name: Build APK
         script: ./gradlew assembleRelease
     artifacts:
-      - app/build/outputs/apk/release/app-release.apk
+      - app/build/outputs/**/*.apk
+    publishing:
+      email:
+        recipients:
+          - maisconhe@gmail.com
