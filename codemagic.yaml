@@ -13,18 +13,23 @@ workflows:
       - name: Build Debug APK
         script: ./gradlew assembleDebug
 
-      - name: Dump all outputs
+      - name: Dump project root
         script: |
-          echo "===== Diretório de outputs completo ====="
-          ls -R app/build/outputs/
+          echo "===== Conteúdo da raiz do projeto ====="
+          ls -R .
 
-      - name: List generated APKs
+      - name: Dump potential output dirs
         script: |
-          echo ">> APKs gerados:"
+          echo "===== Procurando por pastas 'build' ====="
+          find . -type d -name build
+
+      - name: List any APKs anywhere
+        script: |
+          echo "===== APKs encontrados no workspace ====="
           find . -type f -name "*.apk"
 
     artifacts:
-      # Ajuste este padrão ao caminho exato que o `Dump all outputs` revelou
+      # Vai configurar depois que você descobrir o caminho correto
       - app/build/outputs/apk/debug/*.apk
 
     publishing:
