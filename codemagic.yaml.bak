@@ -6,7 +6,7 @@ workflows:
       java: 17
       android: 34
       vars:
-        PACKAGE_NAME: "com.seuprojeto.nome"
+        PACKAGE_NAME: "com.my.newproject9"
     scripts:
       - name: Permitir execução do Gradle Wrapper
         script: chmod +x ./gradlew
