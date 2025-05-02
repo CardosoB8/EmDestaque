@@ -9,17 +9,13 @@ workflows:
         - pull_request
 
     scripts:
-      - name: Make Gradle Wrapper executable
-        script: |
-          chmod +x ./gradlew
-
       - name: Clean
         script: |
-          ./gradlew clean
+          bash gradlew clean
 
       - name: Build debug APK
         script: |
-          ./gradlew assembleDebug
+          bash gradlew assembleDebug
 
     artifacts:
       - app/build/outputs/**/*.apk
