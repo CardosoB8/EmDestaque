@@ -1,21 +1,19 @@
 workflows:
   android-workflow:
-    name: Build Android APK
-    max_build_duration: 60
-
-    triggering:
-      events:
-        - push
-        - pull_request
-
+    name: Build Android App
+    max_build_duration: 20
+    environment:
+      vars:
+        PACKAGE_NAME: "com.my.newproject9"
+      java: 17
+      android: 
+        sdk: 34
     scripts:
+      - name: Permitir execução do Gradle Wrapper
+        script: chmod +x ./gradlew
       - name: Clean
-        script: |
-          bash gradlew clean
-
-      - name: Build debug APK
-        script: |
-          bash gradlew assembleDebug
-
+        script: ./gradlew clean
+      - name: Build APK de debug
+        script: ./gradlew assembleDebug
     artifacts:
       - app/build/outputs/**/*.apk
