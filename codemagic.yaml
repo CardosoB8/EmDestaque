@@ -3,12 +3,11 @@ workflows:
     name: Build Android APK
     max_build_duration: 60
 
-    # Se precisar adicionar variáveis de ambiente (keystore, etc), use "vars:" aqui.
-    # vars:
-    #   KEYSTORE_BASE64: Encrypted(...)
-    #   KEYSTORE_PASSWORD: Encrypted(...)
-    #   KEY_ALIAS: Encrypted(...)
-    #   KEY_PASSWORD: Encrypted(...)
+    # Gatilhos de build automáticos
+    triggering:
+      events:
+        - push
+        - pull_request
 
     scripts:
       - name: Clean
@@ -18,7 +17,3 @@ workflows:
 
     artifacts:
       - app/build/outputs/**/*.apk
-
-    triggers:
-      - push: {}
-      - pull_request: {}
