@@ -2,14 +2,21 @@ workflows:
   android-workflow:
     name: Android Build
     max_build_duration: 45
+
     scripts:
+      - name: Make Gradlew Executable
+        script: |
+          chmod +x gradlew
+
       - name: Clean
         script: ./gradlew clean
+
       - name: Build Debug APK
-        # gera APK de debug, já assinado com a chave default do Android Studio
         script: ./gradlew assembleDebug
+
     artifacts:
       - app/build/outputs/**/*.apk
+
     publishing:
       email:
         recipients:
