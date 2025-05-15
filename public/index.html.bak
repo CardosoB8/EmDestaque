@@ -4,25 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Title (≤ 60 caracteres) -->
-  <title>Vailink.pro – A Melhor Casa de Apostas Online em Moçambique</title>
+  <!-- Título (≤ 60 caracteres) -->
+  <title>Apostas Online em Moçambique – Bônus Até 5 000 MT | Vailink.pro</title>
 
-  <!-- SEO Meta Tags -->
+  <!-- Descrição (150–160 caracteres) -->
   <meta name="description"
-        content="Vailink.pro é a casa de apostas líder em Moçambique: odds competitivas, levantamentos em até 24 h e suporte 24/7. Bônus de até 5 000 MT na primeira aposta!">
+        content="Aposte com segurança em Moçambique: odds altas, levantamentos em até 24 h e suporte 24/7. Ganhe até 5 000 MT de bônus na sua primeira aposta!">
+
+  <!-- Palavras-chave (use com moderação) -->
   <meta name="keywords"
-        content="Vailink.pro, apostas online Moçambique, bônus 5000MT, odds competitivas, levantamentos rápidos, suporte 24/7">
+        content="apostas online Moçambique, bônus apostas 5000MT, odds competitivas, levantamentos rápidos, suporte 24/7">
+
+  <!-- Robots -->
   <meta name="robots" content="index, follow">
+
+  <!-- Autor e Copyright -->
+  <meta name="author" content="DOSO">
+  <meta name="copyright" content="© 2025 Vailink.pro">
+
+  <!-- Canonical -->
   <link rel="canonical" href="https://vailink.pro/">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:site_name" content="Vailink.pro">
-  <meta property="og:title" content="Vailink.pro – A Melhor Casa de Apostas Online">
+  <meta property="og:title" content="Apostas Online em Moçambique – Bônus Até 5 000 MT">
   <meta property="og:description"
-        content="Vailink.pro é a casa de apostas líder em Moçambique, com odds competitivas e levantamentos em até 24 h. Ganhe até 5 000 MT de bônus!">
+        content="Cadastre-se e receba até 5 000 MT de bônus. Odds competitivas e levantamentos em até 24 h com suporte 24/7!">
   <meta property="og:image" content="https://vailink.pro/logo2.webp">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://vailink.pro/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_MZ">
@@ -30,21 +38,21 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@Vailink_pro">
-  <meta name="twitter:creator" content="@Vailink_pro">
-  <meta name="twitter:title" content="Vailink.pro – A Melhor Casa de Apostas">
+  <meta name="twitter:title" content="Apostas Online em Moçambique – Bônus Até 5 000 MT">
   <meta name="twitter:description"
-        content="Vailink.pro é a casa de apostas líder em Moçambique. Odds competitivas, levantamentos rápidos e suporte 24/7!">
+        content="Odds altas, levantamentos rápidos e suporte 24/7. Ganhe até 5 000 MT de bônus!">
   <meta name="twitter:image" content="https://vailink.pro/logo1.webp">
+  <meta name="twitter:creator" content="@Vailink_pro">
 
-  <!-- Schema.org JSON-LD -->
+  <!-- Schema.org JSON-LD para rich snippets -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Vailink.pro",
     "url": "https://vailink.pro/",
-    "headline": "Vailink.pro – A Melhor Casa de Apostas Online em Moçambique",
-    "description": "Vailink.pro é a casa de apostas líder em Moçambique, oferecendo odds altas, levantamentos em 24 h e suporte 24/7.",
+    "headline": "Apostas Online em Moçambique – Bônus Até 5 000 MT",
+    "description": "Aposte com segurança: odds competitivas, levantamentos em 24 h e suporte 24/7. Até 5 000 MT de bônus!",
     "publisher": {
       "@type": "Organization",
       "name": "DOSO",
@@ -57,12 +65,11 @@
   </script>
 
   <!-- Favicon -->
-  <link rel="icon" href="https://vailink.pro/icon1.webp" type="image/webp">
+  <link rel="icon" href="/icon1.webp" type="image/webp">
 
   <!-- Fonts & CSS -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  
   <style>
     .font-heading { font-family: 'Montserrat', sans-serif; }
     .font-body { font-family: 'Open Sans', sans-serif; }
