@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 const express = require('express');
 const admin = require('firebase-admin');
@@ -12,7 +13,7 @@ try {
     type: process.env.FIREBASE_TYPE,
     project_id: process.env.FIREBASE_PROJECT_ID,
     private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
-    private_key: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'), // Substitui literais \n por novas linhas
+    private_key: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
     client_email: process.env.FIREBASE_CLIENT_EMAIL,
     client_id: process.env.FIREBASE_CLIENT_ID,
     auth_uri: process.env.FIREBASE_AUTH_URI,
@@ -45,17 +46,23 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 // --- Middlewares ---
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:9002',
+const allowedOrigins = [process.env.FRONTEND_URL || 'http://localhost:9002', 'http://localhost:9002'];
+console.log("Allowed CORS origins:", allowedOrigins);
+
+app.use(cors({
+    origin: function (origin, callback) {
+        // Permitir requisições sem 'origin' (como mobile apps ou curl) ou se a origem estiver na lista de permitidas
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            console.warn(`Origem CORS não permitida: ${origin}`);
+            callback(new Error('Não permitido por CORS'));
+        }
+    },
     credentials: true,
-  })
-);
-app.use(cookieParser()); // cookieParser deve vir antes de rotas que o usam
+}));
+app.use(cookieParser());
 app.use(bodyParser.json());
-// O PayPal IPN requer o corpo raw, então o urlencoded para o IPN é tratado especificamente na rota.
-// Para outras rotas que podem usar x-www-form-urlencoded:
-// app.use(bodyParser.urlencoded({ extended: true })); // Descomente se necessário para outras rotas
 
 
 // --- Middleware de Autenticação Firebase ---
@@ -168,9 +175,9 @@ app.post('/api/user/record-download', authenticate, async (req, res) => {
 
 
 // --- Rotas de Pagamento (PayPal IPN) ---
-// Usar bodyParser.urlencoded especificamente para esta rota
-app.post('/api/payment/paypal-ipn', bodyParser.urlencoded({ extended: true }), async (req, res) => {
+app.post('/api/payment/paypal-ipn', bodyParser.urlencoded({ extended: false }), async (req, res) => {
   console.log('PayPal IPN recebido:', req.body);
+  res.status(200).send('IPN Recebido'); // Responder imediatamente ao PayPal
 
   let ipnRequestBody = 'cmd=_notify-validate';
   for (const key in req.body) {
@@ -184,7 +191,7 @@ app.post('/api/payment/paypal-ipn', bodyParser.urlencoded({ extended: true }), a
     const paypalVerifyUrl = process.env.PAYPAL_IPN_VERIFY_URL;
     if (!paypalVerifyUrl) {
         console.error('PAYPAL_IPN_VERIFY_URL não está configurado no .env');
-        return res.status(500).send('Configuração do servidor incompleta.');
+        return; // Não enviar res.status(500) aqui, pois já respondemos 200
     }
 
     const verificationResponse = await axios.post(paypalVerifyUrl, ipnRequestBody, {
@@ -207,30 +214,30 @@ app.post('/api/payment/paypal-ipn', bodyParser.urlencoded({ extended: true }), a
         mc_currency,
         txn_id,
         txn_type,
-        custom, // UID do Firebase que VOCÊ DEVE PASSAR AQUI
+        custom, 
         payer_email,
-        subscr_id
+        subscr_id 
       } = req.body;
+      
+      const expectedReceiverEmail = process.env.PAYPAL_RECEIVER_EMAIL;
+      const expectedPrice = process.env.PREMIUM_PLAN_PRICE;
+      const expectedCurrency = process.env.PREMIUM_PLAN_CURRENCY;
 
       if (payment_status !== 'Completed') {
         console.log(`IPN ignorado: payment_status não é 'Completed' (é '${payment_status}').`);
-        return res.status(200).send('OK');
+        return;
       }
-      if (receiver_email !== process.env.PAYPAL_RECEIVER_EMAIL) {
-        console.error(`IPN ignorado: receiver_email ('${receiver_email}') não corresponde ao configurado ('${process.env.PAYPAL_RECEIVER_EMAIL}').`);
-        return res.status(200).send('OK');
+      if (receiver_email !== expectedReceiverEmail) {
+        console.error(`IPN ignorado: receiver_email ('${receiver_email}') não corresponde ao configurado ('${expectedReceiverEmail}').`);
+        return;
       }
-       // Ajuste para permitir pequena variação de preço ou se o preço for dinâmico.
-       // Por agora, vamos manter uma verificação simples.
-      if (parseFloat(mc_gross) < (parseFloat(process.env.PREMIUM_PLAN_PRICE) - 0.01) || mc_currency !== process.env.PREMIUM_PLAN_CURRENCY) {
-        console.warn(`IPN alerta: mc_gross ('${mc_gross} ${mc_currency}') não corresponde estritamente ao preço/moeda do plano ('${process.env.PREMIUM_PLAN_PRICE} ${process.env.PREMIUM_PLAN_CURRENCY}'). Verificando se a diferença é aceitável.`);
-        // Para um único plano, pode ser bom ser estrito, mas para múltiplos planos ou flutuações, você pode precisar de lógica mais flexível.
+      if (parseFloat(mc_gross) < (parseFloat(expectedPrice) - 0.01) || mc_currency !== expectedCurrency) {
+        console.warn(`IPN alerta: mc_gross ('${mc_gross} ${mc_currency}') não corresponde estritamente ao preço/moeda do plano ('${expectedPrice} ${expectedCurrency}'). Verificando se a diferença é aceitável.`);
       }
-
 
       if (!custom) {
         console.error('IPN erro crítico: Campo "custom" (Firebase UID) não recebido do PayPal. Não é possível atualizar o usuário.');
-        return res.status(200).send('OK');
+        return;
       }
       const firebaseUID = custom;
       const userRef = db.ref(`users/${firebaseUID}`);
@@ -238,13 +245,13 @@ app.post('/api/payment/paypal-ipn', bodyParser.urlencoded({ extended: true }), a
 
       if (!snapshot.exists()) {
         console.error(`IPN erro: Usuário com UID '${firebaseUID}' (do campo custom) não encontrado no RTDB.`);
-        return res.status(200).send('OK');
+        return;
       }
       
       const userData = snapshot.val();
       if (userData.lastPaypalTxnId === txn_id) {
           console.log(`IPN ignorado: Transação txn_id '${txn_id}' já processada para o usuário ${firebaseUID}.`);
-          return res.status(200).send('OK');
+          return;
       }
 
       const updates = {
@@ -265,14 +272,16 @@ app.post('/api/payment/paypal-ipn', bodyParser.urlencoded({ extended: true }), a
   } catch (error) {
     console.error('Erro ao verificar PayPal IPN:', error.response ? error.response.data : error.message);
   }
-  res.status(200).send('IPN Processado');
+  // Não enviar res.status(200) aqui novamente
 });
 
 
 // --- Tratamento de Erros Global ---
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ message: 'Ocorreu um erro inesperado no servidor.' });
+  if (!res.headersSent) { // Evitar enviar resposta se já foi enviada (ex: no IPN)
+    res.status(500).json({ message: 'Ocorreu um erro inesperado no servidor.' });
+  }
 });
 
 // --- Iniciar Servidor ---
