@@ -1,0 +1,346 @@
+    <!-- Doso~SEO-870202842 -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Guia de Apostas Pro</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --light: #f8fafc;
+            --text: #1e293b;
+        }
+
+        * {
+        user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+        user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            background: linear-gradient(135deg, #e0f2fe, #f0fdfa);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .chat-container {
+        user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 90vh;
+        }
+
+        .header {
+        user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            background: var(--primary);
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .header h1 {
+        user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .messages-container {
+        user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            flex: 1;
+            padding: 20px 15px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+
+        .message {
+        user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            max-width: 80%;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 15px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .bot-message {
+        user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            background: var(--light);
+            color: var(--text);
+            align-self: flex-start;
+            border: 1px solid #e2e8f0;
+        }
+
+        .user-message {
+        user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+        }
+
+        .options-container {
+        user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            padding: 15px;
+            background: white;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .option-btn {
+        user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            width: 100%;
+            padding: 15px;
+            margin: 8px 0;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            color: var(--primary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: #e2e8f0;
+            margin: 15px 0;
+            border-radius: 2px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            .chat-container {
+                height: 100vh;
+                border-radius: 0;
+            }
+            
+            .option-btn {
+                font-size: 0.9rem;
+                padding: 12px;
+            }
+        }
+
+        .floating-button {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="header">
+            <h1>Guia Especializado</h1>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+        </div>
+        
+        <div class="messages-container" id="messages">
+            <div class="message bot-message">
+                🎉 Bem-vindo! Vamos ajudá-lo a dominar as apostas esportivas!
+            </div>
+        </div>
+
+        <div class="options-container" id="options"></div>
+    </div>
+
+    <div class="floating-button" id="scrollDown">↓</div>
+
+    <script>
+        const flow = [
+            {
+                message: "Primeiro, qual seu nível de experiência?",
+                options: [
+                    "Sou iniciante 🐣",
+                    "Tenho alguma experiência ⚡",
+                    "Já sou experiente 🏆"
+                ]
+            },
+            {
+                message: "🚀 Excelente escolha! Quer acesso imediato ao guia completo ou prefere ver uma amostra?",
+                options: [
+                    "Quero acesso completo agora!",
+                    "Mostre-me uma amostra grátis"
+                ]
+            },
+            {
+                message: "📘 Amostra Gratuita:<br><br>1. Gestão de Banca: Nunca aposte mais de 2% do seu capital<br>2. Análise de Valor: Identifique odds subvalorizadas<br><br>Quer desbloquear as 15 estratégias restantes?",
+                options: [
+                    "Sim, quero acesso total!",
+                    "Preciso de mais informações"
+                ]
+            },
+            {
+                message: "🔓 Acesso Liberado! Clique abaixo para ativar:",
+                button: "CADASTRAR E ACESSAR AGORA"
+            }
+        ];
+
+        let currentStep = 0;
+        const messagesDiv = document.getElementById('messages');
+        const optionsDiv = document.getElementById('options');
+        const progress = document.getElementById('progress');
+        const scrollButton = document.getElementById('scrollDown');
+
+        function updateProgress() {
+            progress.style.width = `${(currentStep/(flow.length-1))*100}%`;
+        }
+
+        function createMessage(text, isUser = false) {
+            const div = document.createElement('div');
+            div.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            div.innerHTML = text;
+            messagesDiv.appendChild(div);
+            div.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showOptions(options) {
+            optionsDiv.innerHTML = '';
+            options.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'option-btn';
+                button.innerHTML = option;
+                button.onclick = () => selectOption(option);
+                optionsDiv.appendChild(button);
+            });
+        }
+
+        function selectOption(option) {
+            createMessage(option, true);
+            currentStep++;
+            
+            if(currentStep >= flow.length) {
+                showRegistration();
+                return;
+            }
+
+            setTimeout(() => {
+                createMessage(flow[currentStep].message);
+                if(flow[currentStep].button) {
+                    showRegistration();
+                } else {
+                    showOptions(flow[currentStep].options);
+                }
+                updateProgress();
+            }, 500);
+        }
+
+        function showRegistration() {
+            optionsDiv.innerHTML = `
+                <a href="https://media1.placard.co.mz/redirect.aspx?pid=5905&bid=1690" 
+                   style="display: block;
+                          background: var(--primary);
+                          color: white;
+                          padding: 15px;
+                          border-radius: 12px;
+                          text-align: center;
+                          text-decoration: none;
+                          font-weight: 600;
+                          box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+                          transition: transform 0.2s;">
+                    🚀 ${flow[currentStep].button || 'DESBLOQUEAR ACESSO'}
+                </a>
+            `;
+            updateProgress();
+        }
+
+        // Scroll mobile
+        messagesDiv.addEventListener('scroll', () => {
+            scrollButton.style.display = (messagesDiv.scrollTop < 
+                messagesDiv.scrollHeight - messagesDiv.clientHeight - 100) ? 
+                'flex' : 'none';
+        });
+
+        scrollButton.onclick = () => {
+            messagesDiv.scrollTo({
+                top: messagesDiv.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+
+        // Iniciar
+        setTimeout(() => {
+            createMessage(flow[0].message);
+            showOptions(flow[0].options);
+        }, 1000);
+    </script>
+</body>
+</html>
+
+    <!-- Doso~SEO-870202842 -->

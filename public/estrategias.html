@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Android Meta Tags -->
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#19cf0d">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Kanit:wght@900&family=Orbitron:wght@800&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Estratégias VIP para Aviator</title>
+    <style>
+        * {
+          user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+            --font-titulo: 'Black Ops One', cursive;
+            --font-subtitulo: 'Kanit', sans-serif;
+            --font-destaque: 'Orbitron', sans-serif;
+            --font-texto: 'Ubuntu', sans-serif;
+        }
+        :root {
+            --primary: #19cf0d;
+            --secondary: #25D366;
+            --dark: #0F0F0F;
+            --light: #FFFFFF;
+            --gradient: linear-gradient(135deg, #19cf0d 0%, #19cf0d 100%);
+            --tap-highlight: rgba(255,107,0,0.1);
+            --font-titulo: 'Black Ops One', cursive;
+            --font-subtitulo: 'Kanit', sans-serif;
+            --font-destaque: 'Orbitron', sans-serif;
+            --font-texto: 'Ubuntu', sans-serif;
+        }
+
+        body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            background: #fff;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+          font-family: var(--font-destaque);
+          user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            text-align: center;
+            padding: 50px 0;
+            background: linear-gradient(45deg, #2a2a4a, #0f3460);
+            margin-bottom: 40px;
+            border-radius: 15px;
+        }
+
+        h1 {
+          font-family: var(--font-destaque);
+          user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            color: #19cf0d;
+        }
+
+        .strategy-grid {
+          font-family: var(--font-texto);
+         user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none; 
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .strategy-card {
+          font-family: var(--font-texto);
+         user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none; 
+            background: #16213e;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #0f3460;
+            transition: transform 0.3s;
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+          font-family: var(--font-destaque); 
+         user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none; 
+            color: #ee0c8b;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .badge {
+          font-family: var(--font-texto);
+          user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            background: #fff;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+
+        .strategy-table {
+          font-family: var(--font-texto);
+          user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            width: 100%;
+            margin: 15px 0;
+            border-collapse: collapse;
+        }
+
+        .strategy-table td, .strategy-table th {
+          font-family: var(--font-texto);
+            padding: 12px;
+            border: 1px solid #0f3460;
+            text-align: left;
+        }
+
+        .golden-rules {
+          font-family: var(--font-texto);
+         user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none; 
+            background: #2a2a4a;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border: 2px solid #e94560;
+        }
+
+        .code-snippet {
+          font-family: var(--font-texto);
+          user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            background: #0f3460;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: monospace;
+        }
+
+        button {
+          user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            background: linear-gradient(45deg, #15de2e, #2a2a4a);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+p1 {
+  font-family: var(--font-destaque);
+  user-select: none; /*  seleção */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+  color: #4d71f5;
+  font-size: 15px;
+}
+        button:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐲 Estratégias VIP para Aviator</h1>
+            <p>Métodos Comprovados por Profissionais</p>
+                        <p1>Use as 10 Estratégias Comprovados por Profissionais</p1>
+        </header>
+
+        <div class="strategy-grid">
+            <!-- Estratégia 1 -->
+            <div class="strategy-card">
+                <h2>⏱️ Rosa no Minuto Exato <span class="badge">Hot</span></h2>
+                <p>Após 2-3 crashes baixos ou altos, aposte 2 minutos depois:</p>
+                <table class="strategy-table">
+                    <tr><th>Hora</th><th>Ação</th></tr>
+                    <tr><td>15:33 (2x)</td><td>Vela inicial</td></tr>
+                    <tr><td>15:33 (4x)</td><td>Observar</td></tr>
+                    <tr><td>15:35 (8x)</td><td>Preparar</td></tr>
+                    <tr><td>15:37</td><td>Apostar para sacar no 5x a 20x+</td></tr>
+                </table>
+                <button onclick="apostarAgora()">APOSTAR AGORA</button>
+
+            </div>
+
+<div class="strategy-card">
+    <h2>🔵 Estratégia dos "5 Azuis" <span class="badge">Nova</span></h2>
+    <p>Após 5 crashes baixos seguidos (abaixo de 2x), a chance de um multiplicador alto (5x-10x+) aumenta bastante:</p>
+    <table class="strategy-table">
+        <tr><th>Sequência</th><th>Ação</th></tr>
+        <tr><td>1.3x, 1.5x, 1.2x, 1.7x, 1.4x</td><td>Identificar os 5 "azuis"</td></tr>
+        <tr><td>Próxima rodada (6ª)</td><td>Apostar o dobro do valor normal</td></tr>
+        <tr><td>Meta</td><td>Sacar entre 5x a 10x+</td></tr>
+    </table>
+<button onclick="apostarAgora()">APOSTAR AGORA</button>
+
+</div>
+
+<div class="strategy-card">
+    <h2>🕒 Estratégia do "Relógio Dourado" <span class="badge">Premium</span></h2>
+    <p>Multiplicadores altos (50x+) tendem a surgir em minutos específicos como :07, :22 e :45 de cada hora:</p>
+    <table class="strategy-table">
+        <tr><th>Horário</th><th>Ação</th></tr>
+        <tr><td>14:07, 14:22, 14:45</td><td>Crashes altos identificados</td></tr>
+        <tr><td>:07, :22, :45</td><td>Aposte nesses minutos “quentes”</td></tr>
+        <tr><td>Saída ideal</td><td>Sacar entre 15x a 50x+</td></tr>
+    </table>
+<button onclick="apostarAgora()">APOSTAR AGORA</button>
+
+</div>
+
+<div class="strategy-card">
+    <h2>🕯️ Estratégia "Vela de Retomada" <span class="badge">Top</span></h2>
+    <p>Se uma rodada terminar com multiplicador abaixo de 1.5x (ex: 1.2x), a próxima tem alta chance de ser uma "vela verde" (3x-10x):</p>
+    <table class="strategy-table">
+        <tr><th>Situação</th><th>Ação</th></tr>
+        <tr><td>Rodada crasha em 1.2x</td><td>Aposte MZN 10</td></tr>
+        <tr><td>Próxima rodada</td><td>Dobre para MZN 20 e retire em 3x</td></tr>
+        <tr><td>Lucro</td><td>MZN 20 x 3 = <strong>MZN 60</strong> (prejuízo anterior: MZN 10 → lucro líquido: <strong>MZN 50</strong>)</td></tr>
+    </table>
+<button onclick="apostarAgora()">APOSTAR AGORA</button>
+
+</div>
+
+<div class="strategy-card">
+    <h2>⚡ Estratégia "Zig-Zag de Ouro" <span class="badge">VIP</span></h2>
+    <p>Padrões alternados de crashes baixos e altos (ex: 1.5x → 10x → 1.8x → 15x) indicam um comportamento em zig-zag:</p>
+    <table class="strategy-table">
+        <tr><th>Cenário</th><th>Ação</th></tr>
+        <tr><td>Após crash baixo (ex: 1.5x)</td><td>Aposte 50% do bankroll e segure até 10x+</td></tr>
+        <tr><td>Após crash alto (ex: 10x)</td><td>Aposte 25% do bankroll e retire rápido (2x-3x)</td></tr>
+    </table>
+<button onclick="apostarAgora()">APOSTAR AGORA</button>
+
+</div>
+
+<div class="strategy-card">
+    <h2>🏰 Estratégia "Torre de Poder" <span class="badge">Alerta</span></h2>
+    <p>Quando o jogo entra em uma "zona calma" (ex: 10 crashes abaixo de 5x), uma explosão acima de 20x está próxima!</p>
+    <table class="strategy-table">
+        <tr><th>Etapa</th><th>Ação</th></tr>
+        <tr><td>4º crash baixo</td><td>Comece a apostar com saída em 10x</td></tr>
+        <tr><td>6º crash baixo</td><td>Aposte pesado e segure até 20x+</td></tr>
+    </table>
+    <button onclick="apostarAgora()">APOSTAR AGORA</button>
+
+</div>
+<div class="strategy-card">
+    <h2>🔥 Estratégia: "Código das Horas Ímpares" <span class="badge">Segredo</span></h2>
+    <p>Horas ímpares (13h, 15h, 17h) apresentam maior frequência de crashes altos (10x+) nos primeiros 5 minutos após o início da hora:</p>
+    <table class="strategy-table">
+        <tr><th>Hora Ímpar</th><th>Minuto de Ouro</th><th>Multiplicador Alvo</th></tr>
+        <tr><td>13:00</td><td>13:02 - 13:05</td><td>10x a 20x</td></tr>
+        <tr><td>15:00</td><td>15:03 - 15:06</td><td>15x a 30x</td></tr>
+        <tr><td>17:00</td><td>17:01 - 17:04</td><td>25x+</td></tr>
+    </table>
+<button onclick="apostarAgora()">APOSTAR AGORA</button>
+
+</div>
+
+<div class="strategy-card">
+    <h2>🔥 Estratégia: "Zona de Risco 0" <span class="badge">Blindada</span></h2>
+    <p>Após um crash de 0.5x a 1x (raro, mas explosivo), a próxima rodada SEMPRE traz um multiplicador acima de 5x em até 3 minutos:</p>
+    <table class="strategy-table">
+        <tr><th>Etapa</th><th>Ação</th></tr>
+        <tr><td>Passo 1</td><td>Monitore até ver um crash abaixo de 1x (ex: 0.8x)</td></tr>
+        <tr><td>Passo 2</td><td>Aposte 50% do bankroll na rodada seguinte e retire em 5x</td></tr>
+        <tr><td>Passo 3</td><td>Se perder, aposte 75% do bankroll (recuperação garantida)</td></tr>
+    </table>
+<button onclick="apostarAgora()">APOSTAR AGORA</button>
+
+</div>
+
+<div class="strategy-card">
+    <h2>🔥 Estratégia: "Sinal da Lua Cheia" <span class="badge">Lunar</span></h2>
+    <p>Em dias de lua cheia, os multiplicadores altos (50x+) são 3x mais frequentes entre 21h e 00h. Use um calendário lunar e aposte agressivamente nesse período!</p>
+    <table class="strategy-table">
+        <tr><th>Data</th><th>Hora</th><th>Ação</th></tr>
+        <tr><td>15/08/2024 (Lua Cheia)</td><td>21:30</td><td>Aposte MZN 500 e segure até 50x</td></tr>
+        <tr><td colspan="3"><strong>Lucro potencial:</strong> MZN 500 x 50 = <strong>MZN 25.000</strong></td>
+    </table>
+<button onclick="apostarAgora()">APOSTAR AGORA</button>
+
+
+</div>
+
+<div class="strategy-card">
+    <h2>🌟 Estratégia: "Método do Infinito" (VIP SECRETO) <span class="badge">Exclusivo</span></h2>
+    <p>Combine 3 estratégias poderosas em uma jogada perfeita:</p>
+    <ul>
+        <li>⏱️ Use a <strong>Estratégia da Rosa no Minuto Exato</strong> para o timing ideal.</li>
+        <li>📈 Aplique a <strong>Pirâmide de Ganhos</strong> para progressão.</li>
+        <li>🌕 Ative o <strong>Sinal da Lua Cheia</strong> para multiplicadores explosivos.</li>
+    </ul>
+    <table class="strategy-table">
+        <tr><th>Cenário VIP</th><th>Ação</th></tr>
+        <tr><td>Dia de lua cheia, 21h30</td><td>Crash 1: 4x → Crash 2: 8x</td></tr>
+        <tr><td>21:32</td><td>Ative a Rosa no Minuto Exato</td></tr>
+        <tr><td>Aposta</td><td>MZN 1.000 e segure até 50x</td></tr>
+        <tr><td>Resultado</td><td><strong>MZN 1.000 x 50 = MZN 50.000</strong> 🤑</td></tr>
+    </table>
+<button onclick="apostarAgora()">APOSTAR AGORA</button>
+
+</div>
+
+        </div>
+        
+
+        <div class="golden-rules">
+    <h2>🚨 REGRAS DE OURO PARA GANHAR SEMPRE</h2>
+    <ul>
+        <li>✅ Siga as estratégias à risca (não improvise!)</li>
+        <li>✅ Anote todos os resultados em uma planilha</li>
+        <li>✅ Aposte apenas com lucro: Reinvista 50% dos ganhos e guarde 50%</li>
+        <li>✅ Controle o tempo: Use alarmes para os "minutos de ouro"</li>
+    </ul>
+</div>
+
+        <div class="golden-rules" style="background: #0f3460; margin-top: 40px;">
+            <h2>👉 PRONTO PARA DOMINAR?</h2>
+            <p>Comece agora, escolha sua estratégia favorita e FAÇA O AViATOR TRABALHAR PARA VOCÊ! 🛩️💥</p>
+        </div>
+    </div>
+    <script>
+      
+  function apostarAgora() {
+    window.open("https://record.elephantbet.com/_rhoOOvBxBOAWqcfzuvZcQGNd7ZgqdRLk/1/", "_blank");
+  }
+
+      window.onload = function() {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.loading = "eager";
+            });
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+
+            document.addEventListener('contextmenu', function (event) {
+                event.preventDefault();
+            });
+
+
+            document.addEventListener('keydown', function (event) {
+                if ((event.ctrlKey && (event.key === 'c' || event.key === 'v')) || 
+                    (event.metaKey && (event.key === 'c' || event.key === 'v'))) {
+                    event.preventDefault();
+                }
+            });
+
+
+            document.addEventListener('copy', function (event) {
+                event.preventDefault();
+            });
+
+            document.addEventListener('paste', function (event) {
+                event.preventDefault();
+            });
+
+
+            document.addEventListener('dragstart', function (event) {
+                event.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>

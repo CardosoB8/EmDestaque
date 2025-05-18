@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gerador de Números</title>
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            background: linear-gradient(45deg, #ff6b6b, #f06595);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .controls {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .controls label {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+        }
+        .controls input {
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 6px;
+            border: none;
+            font-size: 1rem;
+        }
+        .numbers-list {
+            list-style: none;
+            max-height: 300px;
+            overflow-y: auto;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .number-item {
+            padding: 0.8rem;
+            margin: 4px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .number-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(4px);
+        }
+        .buttons-container {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(3, 1fr);
+            margin-top: 1rem;
+        }
+        button, .save-button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #f06595, #ff6b6b);
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+        button:hover, .save-button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(240, 101, 149, 0.3);
+        }
+        .format-select {
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 6px;
+            border: none;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            display: none;
+            animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp {
+            from { bottom: -50px; opacity: 0; }
+            to { bottom: 20px; opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gerador de Números</h1>
+        <div class="controls">
+            <div>
+                <label for="codigo">Código (ex: +258)</label>
+                <input type="text" id="codigo" value="+258">
+            </div>
+            <div>
+                <label for="prefixos">Prefixos (separados por vírgula)</label>
+                <input type="text" id="prefixos" placeholder="84,85,86">
+            </div>
+            <div>
+                <label for="digitos">Dígitos Restantes</label>
+                <input type="number" id="digitos" value="7" min="1" max="10">
+            </div>
+            <div>
+                <label for="quantidade">Quantidade de Números</label>
+                <input type="number" id="quantidade" value="25" min="1" max="1000">
+            </div>
+        </div>
+        <ul class="numbers-list" id="listaNumeros"></ul>
+        <div class="buttons-container">
+            <button onclick="gerarNumeros()">Gerar</button>
+            <button onclick="copiarTodos()">Copiar</button>
+            <select id="format" class="format-select">
+                <option value="txt">TXT</option>
+                <option value="csv">CSV</option>
+                <option value="vcf">VCF</option>
+                <option value="xlsx">XLSX</option>
+            </select>
+            <button class="save-button" onclick="salvarArquivo()">Salvar</button>
+        </div>
+    </div>
+    <div class="toast" id="toast"></div>
+    <script>
+        function showToast(message, duration = 3000) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, duration);
+        }
+        function gerarNumero(codigo, prefixo, digitos) {
+            let numero = codigo + prefixo;
+            for (let i = 0; i < digitos; i++) {
+                numero += Math.floor(Math.random() * 10);
+            }
+            return numero;
+        }
+        function criarItemLista(numero) {
+            const li = document.createElement('li');
+            li.className = 'number-item';
+            li.textContent = numero;
+            li.onclick = () => {
+                navigator.clipboard.writeText(numero);
+                showToast('Número copiado!');
+            };
+            return li;
+        }
+        function gerarNumeros() {
+            const lista = document.getElementById('listaNumeros');
+            lista.innerHTML = '';
+            const codigo = document.getElementById('codigo').value || '+258';
+            const prefixos = document.getElementById('prefixos').value.split(',').map(p => p.trim()).filter(Boolean);
+            const digitos = parseInt(document.getElementById('digitos').value) || 7;
+            const qtd = parseInt(document.getElementById('quantidade').value) || 0;
+            for (let i = 0; i < qtd; i++) {
+                const prefixo = prefixos[Math.floor(Math.random() * prefixos.length)];
+                lista.appendChild(criarItemLista(gerarNumero(codigo, prefixo, digitos)));
+            }
+        }
+        function copiarTodos() {
+            const itens = [...document.querySelectorAll('.number-item')].map(li => li.textContent);
+            if (!itens.length) return showToast('Gere números primeiro!');
+            navigator.clipboard.writeText(itens.join('\n'))
+                .then(() => showToast(`${itens.length} números copiados!`))
+                .catch(() => showToast('Erro ao copiar!'));
+        }
+        function salvarArquivo() {
+            const itens = [...document.querySelectorAll('.number-item')].map(li => li.textContent);
+            if (!itens.length) return showToast('Gere números primeiro!');
+            const formato = document.getElementById('format').value;
+            let blob, filename = `numeros.${formato}`;
+            if (formato === 'txt') {
+                blob = new Blob([itens.join('\n')], {type: 'text/plain'});
+            } else if (formato === 'csv') {
+                blob = new Blob([itens.join(',\n')], {type: 'text/csv'});
+            } else if (formato === 'vcf') {
+                const vcards = itens.map((num, i) =>
+                    `BEGIN:VCARD\nVERSION:3.0\nFN:Contato${i+1}\nTEL;TYPE=CELL:${num}\nEND:VCARD`
+                ).join('\n');
+                blob = new Blob([vcards], {type: 'text/vcard'});
+            } else if (formato === 'xlsx') {
+                const wb = XLSX.utils.book_new();
+                const ws = XLSX.utils.aoa_to_sheet([[ 'Número' ], ...itens.map(n => [n])]);
+                XLSX.utils.book_append_sheet(wb, ws, 'Números');
+                return XLSX.writeFile(wb, filename);
+            }
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passos para aprovação</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            user-select: none; /* desabilita seleção de texto */
+        }.image-container {
+        width: 100%;
+        max-width: 600px;
+        margin-bottom: 20px;
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        position: relative;
+    }
+
+    /* overlay transparente para interceptar tentativas de interações */
+    .block-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+    }
+
+    .image-preview {
+        border: 2px solid #e0e0e0;
+        border-radius: 6px;
+        margin-bottom: 10px;
+        overflow: hidden;
+    }
+
+    .image-preview img {
+        width: 100%;
+        height: auto;
+        display: block;
+        pointer-events: none; /* impede drag e clique */
+        user-drag: none;
+        user-select: none;
+    }
+
+    .description-field {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #e0e0e0;
+        border-radius: 6px;
+        min-height: 80px;
+        resize: vertical;
+        font-size: 14px;
+    }
+
+    .description-field:focus {
+        outline: none;
+        border-color: #6C5DD3;
+        box-shadow: 0 0 0 2px rgba(108,93,211,0.1);
+    }
+
+    @media (max-width: 480px) {
+        body {
+            padding: 10px;
+        }
+        .image-container {
+            padding: 10px;
+        }
+    }
+</style>
+<script>
+    // Desabilita menu de contexto
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    // Desabilita arrastar imagem
+    document.addEventListener('dragstart', e => e.preventDefault());
+    // Desabilita teclas perigosas (PrintScreen, F12, Ctrl+S, Ctrl+U, Ctrl+Shift+I/J)
+    document.addEventListener('keydown', function(e) {
+        // PrintScreen (keyCode 44)
+        if (e.keyCode === 44) {
+            navigator.clipboard.writeText(''); // limpa clipboard
+            e.preventDefault();
+        }
+        // F12
+        if (e.keyCode === 123) e.preventDefault();
+        // Ctrl+S, Ctrl+U
+        if ((e.ctrlKey && e.key === 's') || (e.ctrlKey && e.key === 'u')) e.preventDefault();
+        // Ctrl+Shift+I/J
+        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) e.preventDefault();
+    });
+    // Overlay para bloquear interações sobre a imagem
+    window.addEventListener('load', () => {
+        const container = document.querySelector('.image-container');
+        const overlay = document.createElement('div');
+        overlay.classList.add('block-overlay');
+        container.appendChild(overlay);
+    });
+</script>
+
+</head>
+<body>
+    <div class="image-container">
+        <h1>Siga Passo a Passo</h1>
+        <p>Crie nova conta primeiro e após completar clica na parte que aparece saldo e depois clica na parte "Minha Conta" e vai aparecer assim. após aparecer assim faz captura de tela e envia no assistente</p>
+        <div class="image-preview">
+            <img src="https://i.ibb.co/Vp2sCcf8/IMG-20250407-WA0052.jpg" alt="Comprovante 3">
+        </div>
+    </div>
+</body>
+</html>

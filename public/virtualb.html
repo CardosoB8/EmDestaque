@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Assistente Virtual</title>
+  <!-- Metadados mantidos originais -->
+  <meta name="description" content="Aprenda a apostar online com segurança! Acesse nosso guia gratuito e comece hoje mesmo.">
+  <meta name="keywords" content="apostas esportivas, cassino online, guia de apostas, como apostar, iniciantes">
+  <meta name="author" content="doso">
+  <meta name="robots" content="index, follow">
+  <meta property="og:image" content="https://guia-apostas-mz.vercel.app/guia.webp">
+  <meta property="og:title" content="Guia Completo para Iniciantes em Apostas">
+  <meta property="og:description" content="Aprenda a apostar online com segurança!">
+  <meta property="og:url" content="https://guia-apostas-mz.vercel.app">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_MZ">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Guia Completo para Iniciantes em Apostas">
+  <meta name="twitter:description" content="Aprenda a apostar online com segurança!">
+  <meta name="twitter:image" content="https://guia-apostas-mz.vercel.app/guia.webp">
+  <link rel="icon" href="icon.webp" type="image/webp">
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.0.2/dist/tesseract.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ... estilos existentes ... */
+    /* Ajuste no nome de classe para coincidir com o JS */
+    :root {
+      --clr-primary: #6366F1;
+      --clr-secondary: #4F46E5;
+      --clr-accent: #A5B4FC;
+      --clr-gradient-start: #F0F4FF;
+      --clr-gradient-end: #E0E7FF;
+      --clr-chat-bg: rgba(255, 255, 255, 0.97);
+      --radius: 1.5rem;
+      --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--clr-gradient-start), var(--clr-gradient-end));
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .chat-container {
+      width: 100%;
+      max-width: 600px;
+      height: 80vh;
+      background: var(--clr-chat-bg);
+      border-radius: var(--radius);
+      box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.25);
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: translateY(0);
+      transition: transform 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .chat-container:hover {
+      transform: translateY(-5px);
+    }
+
+    .chat-header {
+      padding: 1.5rem;
+      background: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary));
+      color: white;
+      text-align: center;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    .messages {
+      flex: 1;
+      padding: 1.5rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C9CFF' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .message {
+      max-width: 85%;
+      padding: 1rem 1.25rem;
+      border-radius: 1.25rem;
+      line-height: 1.5;
+      position: relative;
+      opacity: 0;
+      transform: scale(0.95);
+      animation: messagePop 0.4s var(--transition) forwards;
+    }
+
+    @keyframes messagePop {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .user-message {
+      align-self: flex-end;
+      background: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary));
+      color: white;
+      border-bottom-right-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+
+    .bot-message {
+      align-self: flex-start;
+      background: white;
+      color: #374151;
+      border-bottom-left-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .questions {
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.9);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      display: grid;
+      gap: 0.75rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .question-btn {
+      background: white;
+      border: 2px solid var(--clr-accent);
+      padding: 1rem;
+      border-radius: 1rem;
+      font-weight: 500;
+      color: var(--clr-secondary);
+      cursor: pointer;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .question-btn:hover:not([disabled]) {
+      background: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary));
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.2);
+    }
+
+    .question-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .progress-container {
+      padding: 1rem;
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin: 0.5rem 0;
+    }
+
+    .progress-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .progress-icon {
+      width: 24px;
+      height: 24px;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    .progress-text {
+      font-weight: 600;
+      color: var(--clr-secondary);
+    }
+
+    .progress-bar {
+      height: 10px;
+      background: #E5E7EB;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--clr-primary), var(--clr-secondary));
+      transition: width 0.4s ease;
+      position: relative;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
+    }
+
+    .progress-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      color: #6B7280;
+      transition: all 0.3s ease;
+    }
+
+    .step.active {
+      background: rgba(99, 102, 241, 0.05);
+      color: var(--clr-secondary);
+      font-weight: 500;
+    }
+
+    .step-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    .popup {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 1rem 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+      color: var(--clr-secondary);
+      z-index: 1000;
+      animation: popupSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes popupSlide {
+      from {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .chat-container {
+        height: 90vh;
+        border-radius: 1rem;
+      }
+      .message {
+        max-width: 90%;
+      }
+      .question-btn {
+        padding: 0.75rem;
+        font-size: 0.875rem;
+      }
+    }
+    .progress-bar-fill { width: 0%; height: 10px; background: linear-gradient(90deg, var(--clr-primary), var(--clr-secondary)); transition: width 0.2s ease; }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header"><h1>Assistente Paulo</h1></div>
+    <div class="messages" id="messages">
+      <div class="message bot-message">Olá, em que posso ajudar?</div>
+    </div>
+    <div class="questions" id="questions">
+      <button class="question-btn" onclick="selectQuestion(this,1)">Olá, Quero receber o guia de apostas e casino online.</button>
+      <button class="question-btn" onclick="selectQuestion(this,2)">Olá, quero saber sobre o guia.</button>
+    </div>
+  </div>
+
+  <script>
+    const questionsData = {
+      1: {
+        followUp: { options: [
+          { text:'Sim', value:101 },
+          { text:'Não', value:102 },
+          { text:'Voltar ao menu principal', value:0 }
+        ] }
+      },
+      2: {
+        answer: 'Ótimo, o guia de apostas online é a melhor guia que você pode conhecer hoje. Este guia serve para ajudar os iniciantes em apostas online, lá tem quase tudo que você precisa aprender e entender, se sinta à vontade para receber esse guia de ouro. Deseja continuar?',
+        followUp: { options: [
+          { text:'Sim', value:101 },
+          { text:'Não', value:102 },
+          { text:'Voltar ao menu principal', value:0 }
+        ] }
+      },
+      101: {
+        answer: `Ótimo! Crie nova conta aqui para verificar:
+                 <a href="https://record.elephantbet.com/_rhoOOvBxBOAWqcfzuvZcQGNd7ZgqdRLk/1/" target="_blank">Criar conta</a><br>
+                 E mande comprovante como essa aqui de exemplo:
+                 <a href="https://guia-apostas-mz.vercel.app/exemplob.html" target="_blank">Ver exemplo</a>`,
+        followUp: { options: [
+          { text:'Voltar ao menu principal', value:0 }
+        ] },
+        showFileInput: true
+      },
+      102: {
+        answer: 'Ok, você pode voltar ao menu.',
+        followUp: { options: [
+          { text:'Voltar ao menu principal', value:0 }
+        ] }
+      },
+      0: {
+        answer: 'Menu principal:',
+        followUp: { options: [
+          { text:'Quero receber o guia', value:1 },
+          { text:'Quero saber sobre este guia', value:2 }
+        ] }
+      }
+      /* ... dados existentes ... */ };
+
+    async function processReceipt(file, progressFill, processingStep) {
+      return new Promise((resolve, reject) => {
+        Tesseract.recognize(file, 'por', {
+          logger: m => {
+            if (m.status === 'recognizing text') {
+              const pct = Math.round(m.progress * 100);
+              progressFill.style.width = pct + '%';
+              processingStep.textContent = `📷 Analisando imagem (${pct}%)`;
+            }
+          }
+        }).then(result => resolve({ text: result.data.text }))
+          .catch(err => reject(err));
+      });
+    }
+
+    function selectQuestion(btn, id) {
+      const data = questionsData[id]; if (!data) return;
+      document.querySelectorAll('.question-btn').forEach(b => b.disabled = true);
+      const msgs = document.getElementById('messages');
+      const um = document.createElement('div'); um.className = 'message user-message'; um.textContent = btn.textContent;
+      msgs.appendChild(um); msgs.scrollTop = msgs.scrollHeight;
+
+      setTimeout(() => {
+        const bm = document.createElement('div'); bm.className = 'message bot-message';
+        if (id === 1) {
+          const pos = Math.floor(Math.random() * 317) + 52;
+          bm.textContent = `Ótimo, você está na posição ${pos} dos usuários que solicitam o guia hoje, quer continuar?`;
+        } else {
+          bm.innerHTML = data.answer || '';
+        }
+        msgs.appendChild(bm); msgs.scrollTop = msgs.scrollHeight;
+        const q = document.getElementById('questions'); q.innerHTML = '';
+
+        if (data.showFileInput) {
+          const fi = document.createElement('input'); fi.type = 'file'; fi.accept = 'image/*'; fi.id = 'fileInput'; q.appendChild(fi);
+          const sendBtn = document.createElement('button'); sendBtn.className = 'question-btn'; sendBtn.textContent = 'Enviar Comprovante';
+          sendBtn.onclick = async () => {
+            const file = fi.files[0]; if (!file) return showPopup('Selecione uma imagem antes.');
+            fi.disabled = true; sendBtn.disabled = true;
+
+            const progressMsg = document.createElement('div');
+            progressMsg.className = 'message bot-message';
+            progressMsg.innerHTML = `
+              <div class="progress-container">
+                <div class="progress-text">Processando comprovante...</div>
+                <div class="step uploading active">⏳ Enviando arquivo</div>
+                <div class="progress-bar"><div class="progress-bar-fill" id="barFill"></div></div>
+                <div class="step processing">📷 Analisando imagem</div>
+                <div class="step validating">🔍 Validando dados</div>
+              </div>`;
+            msgs.appendChild(progressMsg); msgs.scrollTop = msgs.scrollHeight;
+
+            const progressFill = progressMsg.querySelector('#barFill');
+            const processingStep = progressMsg.querySelector('.processing');
+            const validatingStep = progressMsg.querySelector('.validating');
+
+            try {
+              // Simula envio (100ms)
+              await new Promise(res => {
+                let pct = 0;
+                const intv = setInterval(() => {
+                  pct += 20;
+                  progressFill.style.width = pct + '%';
+                  if (pct >= 100) { clearInterval(intv); res(); }
+                }, 100);
+              });
+              // Passa para análise
+              processingStep.classList.add('active');
+
+              const { text } = await processReceipt(file, progressFill, processingStep);
+              // Validação
+              validatingStep.classList.add('active');
+              const response = await fetch('/api/validate', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ text }) });
+              const result = await response.json();
+
+              progressMsg.remove();
+              const finalMsg = document.createElement('div'); finalMsg.className = 'message bot-message';
+              if (result.approved) {
+                finalMsg.innerHTML = `✅ Comprovante aprovado! Aqui está o link para baixar o guia: <a href="${result.guideLink}" target="_blank">Acessar Conteúdo</a>`;
+              } else {
+                finalMsg.textContent = result.message || 'Erro na validação do comprovante';
+              }
+              msgs.appendChild(finalMsg);
+            } catch (error) {
+              progressMsg.remove(); showPopup(error.message);
+            } finally {
+              selectQuestion(sendBtn, 0);
+            }
+          };
+          q.appendChild(sendBtn);
+        }
+
+        data.followUp.options.forEach(opt => {
+          const b = document.createElement('button'); b.className = 'question-btn'; b.textContent = opt.text; b.onclick = () => selectQuestion(b, opt.value);
+          q.appendChild(b);
+        });
+      }, 800);
+    }
+
+    function showPopup(message, duration = 3000) {
+      const popup = document.createElement('div'); popup.className = 'popup'; popup.textContent = message;
+      document.body.appendChild(popup);
+      setTimeout(() => popup.remove(), duration);
+    }
+  </script>
+</body>
+</html>
