@@ -16,25 +16,26 @@
 
   <script>
     (function() {
-      const partnerUrl = 'https://record.elephantbet.com/_rhoOOvBxBOAWqcfzuvZcQGNd7ZgqdRLk/1/'; // << substitua aqui
+      const partnerUrl = 'https://record.elephantbet.com/_rhoOOvBxBOAWqcfzuvZcQGNd7ZgqdRLk/1/'; // ← Substitua
       const KEY = 'redirectTime';
       const now = Date.now();
       const saved = localStorage.getItem(KEY);
 
       if (!saved) {
-        // Primeira vez: salva e sai
+        // 1ª vez: salva timestamp e redireciona
         localStorage.setItem(KEY, now);
         window.location.href = partnerUrl;
       } else {
-        // Já voltou: checa 2 minutos
-        const diff = now - parseInt(saved, 10);
-        if (diff >= 2 * 60 * 1000) {
-          // Se OK, volta a index com flag
-          window.location.href = 'guia-especialista-apostas-online.html?fromRedirect=true';
+        // Usuário voltou: checa 2 minutos
+        const elapsed = now - parseInt(saved, 10);
+        if (elapsed >= 2 * 60 * 1000) {
+          // OK: volta à index para habilitar botão
+          window.location.href = 'https://vailink.pro/guia-especialista-apostas-online';
         } else {
-          // Se não, avisa para aguardar e cadastrar
+          // Falha: pede cadastro + espera, limpa storage para reiniciar
           document.getElementById('message').textContent =
-            'Verificamos que não concluiu o cadastro na plataforma parceira. para receber o Guia Conclua o cadastro na plataforma parceira e volte novamente para liberar o link do guia.';
+            'Conclua o cadastro na plataforma parceira e após completar pode voltar para página inicial Seu Guia será Liberado.';
+          localStorage.removeItem(KEY);
         }
       }
     })();

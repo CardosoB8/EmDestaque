@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Do Iniciante ao Especialista em Apostas Online</title>
-  <meta name="description" content="Aprenda a apostar online com inteligência! Acesse nosso guia gratuito e comece hoje mesmo.">
+  <title>Do Iniciante ao Especialista em Apostas</title>
+    <meta name="description" content="Aprenda a apostar online com inteligência! Acesse nosso guia gratuito e comece hoje mesmo.">
     <meta name="keywords" content="apostas esportivas, cassino online, guia de apostas, como apostar, iniciantes">
     <meta name="author" content="doso">
     <meta name="robots" content="index, follow">
@@ -44,9 +44,10 @@
       <div class="text-center text-white max-w-2xl">
         <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Do Iniciante ao Especialista em Apostas</h1>
         <p class="text-lg md:text-2xl mb-6">Descubra as técnicas comprovadas que os profissionais usam para analisar jogos, gerenciar o banco e maximizar lucros.</p>
-        <!-- agora aponta para redirect.html -->
-        <button id="primary-cta" onclick="window.location.href='redirecionar.html';" 
-                class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-full text-lg transition">
+        <!-- envia para redirect.html -->
+        <button id="primary-cta"
+          onclick="window.location.href='https://vailink.pro/redirecionar';"
+          class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-full text-lg transition">
           Quero Meu Guia Agora
         </button>
       </div>
@@ -58,7 +59,7 @@
     <!-- O Que Você Vai Aprender -->
     <section id="aprenda" class="space-y-6">
       <h2 class="text-3xl font-bold text-center">O Que Você Vai Aprender</h2>
-      <p class="italic text-center text-gray-600">Aposte com inteligência, não com sorte.</p>
+      <p class="italic text-center text-gray-600">Aposte com confiança, não com sorte.</p>
       <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <li class="flex items-start"><span class="material-icons text-green-500 mr-2"></span><strong>Análise de Probabilidades:</strong> Como interpretar odds e identificar valor escondido.</li>
         <li class="flex items-start"><span class="material-icons text-green-500 mr-2"></span><strong>Gestão de Banca Inteligente:</strong> Técnicas para proteger seu capital.</li>
@@ -93,25 +94,18 @@
     <!-- CTA Secundário e Contador -->
     <section id="cta-secundario" class="text-center space-y-4">
       <p class="text-lg">Após concluir seu cadastro na plataforma parceira, retorne e clique:</p>
-      <button id="secondary-cta" class="disabled-btn bg-blue-500 text-white font-semibold py-3 px-8 rounded-full text-lg" disabled>
+      <button id="secondary-cta"
+        class="disabled-btn bg-blue-500 text-white font-semibold py-3 px-8 rounded-full text-lg"
+        disabled>
         ✔️ Já Concluí e Quero Meu Conteúdo
       </button>
       <div class="mt-4">
-        <span class="font-semibold">Oferta válida por:</span> 
+        <span class="font-semibold">Oferta válida por:</span>
         <span id="countdown" class="font-mono text-xl"></span>
       </div>
     </section>
 
-    
   </main>
-
-  <!-- Rodapé -->
-  <footer class="bg-gray-800 text-gray-300 py-6 mt-16">
-    <div class="max-w-4xl mx-auto text-center space-y-2">
-      <p>Precisa de ajuda? <a href="mailto:maisconhe@gmail.com" class="text-green-400 hover:underline">maisconhe@gmail.com</a></p>
-      <p>@Todos direitos reservados</p>
-    </div>
-  </footer>
 
   <!-- Modal de Alerta Profissional -->
   <div id="modal-alert" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
@@ -130,56 +124,60 @@
     </div>
   </div>
 
+  <!-- Rodapé -->
+  <footer class="bg-gray-800 text-gray-300 py-6 mt-16">
+    <div class="max-w-4xl mx-auto text-center space-y-2">
+      <p>Precisa de ajuda? <a href="mailto: maisconhe@gmail.com" class="text-green-400 hover:underline">maisconhe@gmail.com</a></p>
+            <p>@Todos direitos reservados</p>
+    </div>
+  </footer>
+
   <!-- Scripts -->
   <script>
-    // Countdown timer (48h) – permanece igual
+    // --- Timer de 48h ---
     const deadline = new Date(Date.now() + 48*60*60*1000);
     const countdownEl = document.getElementById('countdown');
     function updateCountdown() {
-      const now = new Date();
-      const diff = deadline - now;
+      const diff = deadline - Date.now();
       if (diff <= 0) {
         countdownEl.textContent = 'Oferta Expirada';
         clearInterval(intervalId);
         return;
       }
-      const hrs = String(Math.floor(diff / (1000*60*60))).padStart(2, '0');
-      const mins = String(Math.floor((diff % (1000*60*60)) / (1000*60))).padStart(2, '0');
-      const secs = String(Math.floor((diff % (1000*60)) / 1000)).padStart(2, '0');
+      const hrs = String(Math.floor(diff / 3.6e6)).padStart(2, '0');
+      const mins = String(Math.floor((diff % 3.6e6) / 6e4)).padStart(2, '0');
+      const secs = String(Math.floor((diff % 6e4) / 1000)).padStart(2, '0');
       countdownEl.textContent = `${hrs}:${mins}:${secs}`;
     }
     const intervalId = setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Habilita o botão secundário se vier do redirect e já passou ≥2min
+    // --- Habilita botão se passaram ≥2min desde redirect ---
     window.addEventListener('DOMContentLoaded', () => {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get('fromRedirect') === 'true') {
-        const saved = localStorage.getItem('redirectTime');
-        if (saved && (Date.now() - parseInt(saved, 10)) >= 2*60*1000) {
-          const btn = document.getElementById('secondary-cta');
-          btn.disabled = false;
-          btn.classList.remove('disabled-btn');
-        }
+      const saved = localStorage.getItem('redirectTime');
+      if (saved && (Date.now() - parseInt(saved, 10)) >= 2 * 60 * 1000) {
+        const btn = document.getElementById('secondary-cta');
+        btn.disabled = false;
+        btn.classList.remove('disabled-btn');
       }
     });
 
-    // Popup modal
+    // --- Popup Modal ---
     const modal = document.getElementById('modal-alert');
     const btn2  = document.getElementById('secondary-cta');
     const close = document.getElementById('modal-close');
 
     btn2.addEventListener('click', () => {
-      const params       = new URLSearchParams(window.location.search);
-      const fromRedirect = params.get('fromRedirect') === 'true';
-      const saved        = localStorage.getItem('redirectTime');
-      const elapsed      = saved ? (Date.now() - parseInt(saved, 10)) : 0;
+      const saved = localStorage.getItem('redirectTime');
+      const elapsed = saved ? (Date.now() - parseInt(saved, 10)) : 0;
 
-      if (fromRedirect && elapsed >= 2 * 60 * 1000) {
-        // Tudo ok: abre o guia
+      if (saved && elapsed >= 2 * 60 * 1000) {
+        // OK: libera guia e limpa storage
+        localStorage.removeItem('redirectTime');
         window.location.href = 'https://www.mediafire.com/file/n035y60by0ye6ic/DoInicianteParaEspecialista-apostas.pdf/file';
       } else {
-        // Exibe modal profissional
+        // Falha: abre modal e limpa storage para reiniciar fluxo
+        localStorage.removeItem('redirectTime');
         modal.classList.remove('hidden');
         modal.classList.add('flex');
       }
