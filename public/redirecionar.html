@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecionando…</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { @apply bg-gray-50 flex items-center justify-center h-screen text-gray-800; }
+    #message { @apply text-center text-lg; }
+  </style>
+</head>
+<body>
+  <div id="message">Redirecionando você para a plataforma parceira…</div>
+
+  <script>
+    (function() {
+      const partnerUrl = 'https://record.elephantbet.com/_rhoOOvBxBOAWqcfzuvZcQGNd7ZgqdRLk/1/'; // << substitua aqui
+      const KEY = 'redirectTime';
+      const now = Date.now();
+      const saved = localStorage.getItem(KEY);
+
+      if (!saved) {
+        // Primeira vez: salva e sai
+        localStorage.setItem(KEY, now);
+        window.location.href = partnerUrl;
+      } else {
+        // Já voltou: checa 2 minutos
+        const diff = now - parseInt(saved, 10);
+        if (diff >= 2 * 60 * 1000) {
+          // Se OK, volta a index com flag
+          window.location.href = 'guia-especialista-apostas-online.html?fromRedirect=true';
+        } else {
+          // Se não, avisa para aguardar e cadastrar
+          document.getElementById('message').textContent =
+            'Verificamos que não concluiu o cadastro na plataforma parceira. para receber o Guia Conclua o cadastro na plataforma parceira e volte novamente para liberar o link do guia.';
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
