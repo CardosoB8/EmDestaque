@@ -32,6 +32,20 @@
   <!-- Inter Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
   <style>
+  /* Desabilita seleção de texto */
+  html, body {
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+
+  /* Impede que imagens sejam arrastadas */
+  img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    pointer-events: none;
+  }
+
     body { font-family: 'Inter', sans-serif; }
     .disabled-btn { opacity: 0.5; cursor: not-allowed; }
   </style>
@@ -161,6 +175,22 @@
         btn.classList.remove('disabled-btn');
       }
     });
+    
+    // Impede menu de contexto (botão direito)
+  document.addEventListener('contextmenu', e => e.preventDefault());
+
+  // Impede copiar, cortar e colar
+  ['copy', 'cut', 'paste'].forEach(evt =>
+    document.addEventListener(evt, e => e.preventDefault())
+  );
+
+  // Impede arrastar qualquer elemento
+  document.addEventListener('dragstart', e => e.preventDefault());
+
+  // Em imagens, impede download via “abrir em nova aba”
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('mousedown', e => e.preventDefault());
+  });
 
     // --- Popup Modal ---
     const modal = document.getElementById('modal-alert');
