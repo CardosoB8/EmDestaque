@@ -11,7 +11,16 @@
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <style>
-    body { font-family: 'Inter', sans-serif; }
+    /* permite seleção de texto, mas impede arrastar */
+    body {
+      font-family: 'Inter', sans-serif;
+      user-select: text;
+    }
+    /* impede arrastar qualquer elemento */
+    * {
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-900">
@@ -22,9 +31,11 @@
       <div class="text-center text-white max-w-2xl">
         <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Um Guia Abrangente para Reduzir Masturbação</h1>
         <p class="text-lg md:text-2xl mb-6">Técnicas eficazes para controlar impulsos, fortalecer sua mente e viver com mais equilíbrio.</p>
-        <button id="primary-cta" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-full text-lg transition">
-          Adquirir Agora por $2
-        </button>
+        <a href="https://www.paypal.com/ncp/payment/ABGNDAKCZY6M2" target="_blank">
+          <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-full text-lg transition">
+            Adquirir Agora por $2
+          </button>
+        </a>
       </div>
     </div>
   </section>
@@ -77,20 +88,28 @@
     <!-- Chamada para Ação Secundária -->
     <section id="cta-secundario" class="text-center space-y-4">
       <p class="text-lg">Clica no botão abaixo para comprar agora</p>
-      <button id="secondary-cta" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-full text-lg transition">
-        ✔️Quero comprar o guia agora
-      </button>
-      <div class="mt-2 text-gray-600 italic">Você será redirecionado a uma página de pagamento..</div>
+      <a href="https://www.paypal.com/ncp/payment/ABGNDAKCZY6M2" target="_blank">
+        <button class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-full text-lg transition">
+          ✔️ Quero comprar o guia agora
+        </button>
+      </a>
+      <div class="mt-2 text-gray-600 italic">Você será redirecionado a uma página de pagamento.</div>
     </section>
   </main>
 
   <!-- Rodapé -->
-  <footer class="bg-gray-800 text-gray-300 py-6 mt-16">
-    <div class="max-w-4xl mx-auto text-center space-y-2">
-      <p>Suporte: <a href="mailto: maisconhe@gmail.com" class="text-blue-400 hover:underline">maisconhe@gmail.com</a></p>
-      <p>@Todos direitos reservados</p>
-    </div>
+  <footer class="bg-gray-800 text-gray-300 py-6 mt-16 text-center">
+    <p>Suporte: <a href="mailto:maisconhe@gmail.com" class="text-blue-400 hover:underline">maisconhe@gmail.com</a></p>
+    <p>@Todos direitos reservados</p>
   </footer>
 
+  <script>
+    // impede arrastar qualquer elemento via script
+    document.addEventListener('dragstart', e => e.preventDefault());
+    // impede menu de contexto em imagens (caso existam)
+    document.addEventListener('contextmenu', e => {
+      if (e.target.tagName === 'IMG') e.preventDefault();
+    });
+  </script>
 </body>
 </html>
