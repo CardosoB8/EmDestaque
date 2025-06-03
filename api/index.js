@@ -85,8 +85,7 @@ app.post('/api/validate', (req, res) => {
 
     if (approved) {
       return res.json({
-        approved: true,
-        message: 'Seu acesso: Nome: GoodBot Senha: 654321',
+        approved: true,        
         guideLink: 'https://www.mediafire.com/file/c5xy3yuthu9oil1/SEO_HACKER_AVIATOR_1.0.apk/file'
       });
     } else {
