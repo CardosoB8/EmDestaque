@@ -5,14 +5,15 @@
       "src": "api/index.js",
       "use": "@vercel/node"
     }
-    // Não precisamos de um build para public/**/* aqui,
-    // pois o Vercel lida com assets estáticos por padrão
-    // quando eles estão em pastas como 'public'.
   ],
   "rewrites": [
     {
       "source": "/:path((?!api/).*)",
       "destination": "/public/:path.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/public/$1"
     }
   ],
   "routes": [
