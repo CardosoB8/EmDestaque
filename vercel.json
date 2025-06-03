@@ -10,6 +10,10 @@
     {
       "source": "/:path((?!api/).*)",
       "destination": "/public/:path.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/public/$1"
     }
   ],
   "routes": [
