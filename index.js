@@ -1,4 +1,5 @@
-// server.js
+// api/index.js
+const serverless = require('serverless-http');
 const express    = require('express');
 const fileUpload = require('express-fileupload');
 const axios      = require('axios');
@@ -8,17 +9,17 @@ const fs         = require('fs');
 const path       = require('path');
 
 const app = express();
-const port = process.env.PORT || 3000;
-const OCR_SPACE_API_KEY = 'K85155303888957';
+const OCR_SPACE_API_KEY = process.env.OCR_SPACE_API_KEY || 'K85155303888957';
 
 // ---------- 1. Middlewares Gerais ----------
+// ATENÇÃO: em Vercel Functions, o body vem “raw” por padrão. Precisamos do express.json():
 app.use(cors());
 app.use(express.json());
 
-// Configura express-fileupload (até 5 MB, usa pasta ./tmp/)
-const tmpDir = path.join(__dirname, 'tmp');
+// Configura express-fileupload (até 5 MB, usa pasta /tmp/ local do Vercel)
+const tmpDir = path.join('/tmp', 'uploads');   // no Vercel, /tmp é a única pasta gravável
 if (!fs.existsSync(tmpDir)) {
-  fs.mkdirSync(tmpDir);
+  fs.mkdirSync(tmpDir, { recursive: true });
 }
 app.use(fileUpload({
   limits: { fileSize: 5 * 1024 * 1024 },
@@ -28,30 +29,33 @@ app.use(fileUpload({
 
 // ---------- 2. Rotas de API ----------
 
-// Rota OCR
+// Rota OCR (POST /api/ocr)
 app.post('/api/ocr', async (req, res) => {
   try {
-    console.log('Iniciando OCR: req.files =', req.files);
+    // OBS: A função “express-fileupload” pode não popular req.files no Vercel.
+    // No entanto, se o cliente fizer upload via multipart/form-data, funciona.
     if (!req.files || !req.files.file) {
       return res.status(400).json({ error: 'Nenhum arquivo enviado' });
     }
 
     const tempPath = req.files.file.tempFilePath;
-    console.log('Arquivo temporário:', tempPath);
+    if (!fs.existsSync(tempPath)) {
+      return res.status(400).json({ error: 'Arquivo temporário não encontrado' });
+    }
 
+    // Monta o FormData para OCR.space
     const form = new FormData();
     form.append('apikey', OCR_SPACE_API_KEY);
     form.append('language', 'por');
     form.append('file', fs.createReadStream(tempPath));
 
+    // Chama a API do OCR.space
     const ocrRes = await axios.post('https://api.ocr.space/parse/image', form, {
       headers: form.getHeaders(),
       timeout: 60000
     });
 
     const body = ocrRes.data;
-    console.log('Resposta OCR.space:', body);
-
     if (body.IsErroredOnProcessing) {
       const msg = Array.isArray(body.ErrorMessage)
                     ? body.ErrorMessage.join('; ')
@@ -60,11 +64,17 @@ app.post('/api/ocr', async (req, res) => {
       return res.status(500).json({ error: msg });
     }
 
+    // Concatena os textos retornados
     const text = body.ParsedResults.map(r => r.ParsedText).join('\n');
     fs.unlink(tempPath, () => {});
     return res.status(200).json({ text });
+
   } catch (err) {
     console.error('[OCR.space ERROR]', err);
+    // Tenta remover arquivo temporário se existir
+    if (req.files && req.files.file && req.files.file.tempFilePath) {
+      fs.unlink(req.files.file.tempFilePath, () => {});
+    }
     return res.status(500).json({
       error: 'Falha no OCR externo',
       details: err.message
@@ -72,7 +82,7 @@ app.post('/api/ocr', async (req, res) => {
   }
 });
 
-// Rota de validação
+// Rota de validação (POST /api/validate)
 app.post('/api/validate', (req, res) => {
   try {
     const { text } = req.body;
@@ -88,9 +98,7 @@ app.post('/api/validate', (req, res) => {
       .trim()
       .toLowerCase();
 
-    console.log('Texto original:', original);
-    console.log('Texto limpo:', cleaned);
-
+    // Monta a data de hoje para conferir “03/06/2025” ou “3/6/2025”
     const today = new Date();
     const dia = today.getDate();
     const mes = today.getMonth() + 1;
@@ -100,8 +108,6 @@ app.post('/api/validate', (req, res) => {
     const hasRegistado = cleaned.includes('registado');
     const hasDate     = dateRegex.test(cleaned);
     const hasObrigado = /\bobrigado\b/.test(cleaned);
-
-    console.log('Flags → registado:', hasRegistado, '| data:', hasDate, '| obrigado:', hasObrigado);
 
     const approved = (hasRegistado && hasDate) || hasObrigado;
 
@@ -123,6 +129,7 @@ app.post('/api/validate', (req, res) => {
         debug: { original, cleaned }
       });
     }
+
   } catch (err) {
     console.error('[VALIDATE ERROR]', err);
     return res.status(500).json({
@@ -132,19 +139,24 @@ app.post('/api/validate', (req, res) => {
   }
 });
 
-// ---------- 3. Servir estáticos em public/ (HTML, CSS, JS, imagens) ----------
-app.use(express.static(path.join(__dirname, 'public')));
 
-// ---------- 4. Rota dinâmica para “/pagina” servir public/pagina.html ----------
+// ---------- 3. Atendendo arquivos estáticos (HTML/CSS/JS) ----------
+// Em ambiente serverless, normalmente deixamos public/ fora do handler.
+// Mas, como queremos um “único arquivo”, servimos manualmente aqui:
+
+app.use(express.static(path.join(__dirname, '../public')));
+
+
+// ---------- 4. Rota dinâmica para páginas sem .html ----------
+// Ex.: GET /pagina → serve public/pagina.html
 app.get('/:page', (req, res) => {
   const page = req.params.page;
   if (page.includes('..')) {
     return res.status(400).send('Bad Request');
   }
 
-  const filePath = path.join(__dirname, 'public', `${page}.html`);
-  console.log('Tentando servir arquivo HTML:', filePath);
-
+  // Monta o caminho para public/<page>.html
+  const filePath = path.join(__dirname, '../public', `${page}.html`);
   if (fs.existsSync(filePath)) {
     return res.sendFile(filePath);
   } else {
@@ -152,12 +164,12 @@ app.get('/:page', (req, res) => {
   }
 });
 
-// ---------- 5. Fallback 404 (opcional) ----------
+
+// ---------- 5. Rota catch‐all (fallback 404) ----------
 app.use((req, res) => {
   res.status(404).send('404 — Nada correspondido');
 });
 
-// Inicia servidor
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}/`);
-});
+
+// ---------- 6. Em vez de app.listen, exportamos o handler serverless ----------
+module.exports = serverless(app);

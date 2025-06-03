@@ -1,16 +1,18 @@
 {
-  "name": "backendbydoso",
+  "name": "meu‐servidor‐completo",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node api/index.js"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "express-fileupload": "^1.4.0",
-    "firebase-admin": "^12.3.1",
-    "tesseract.js": "^4.0.2"
+    "express-fileupload": "^1.5.5",
+    "form-data": "^4.0.0",
+    "serverless-http": "^3.0.0"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
