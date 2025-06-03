@@ -86,7 +86,8 @@ app.post('/api/validate', (req, res) => {
     if (approved) {
       return res.json({
         approved: true,
-        guideLink: 'https://www.mediafire.com/file/zvy5z1jdow995aj/10_Ferramentas_de_Apostas_online_para_iniciantes.pdf/file'
+        message: 'Seu acesso: Nome: GoodBot Senha: 654321',
+        guideLink: 'https://www.mediafire.com/file/c5xy3yuthu9oil1/SEO_HACKER_AVIATOR_1.0.apk/file'
       });
     } else {
       return res.json({
