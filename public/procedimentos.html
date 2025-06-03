@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROBÔ LOUREN - Guia de Procedimento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0V4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* Cor de fundo escura */
+            color: #e2e8f0; /* Texto claro */
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none;    /* Safari */
+            -khtml-user-select: none;     /* Konqueror HTML */
+            -moz-user-select: none;       /* Old Firefox */
+            -ms-user-select: none;        /* Internet Explorer/Edge */
+            user-select: none;            /* Non-prefixed version */
+            -webkit-user-drag: none; /* Desativa arrastar elementos em WebKit */
+        }
+        /* Animação de fade-in para elementos */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Atrasos para animações */
+        .fade-in-1 { animation-delay: 0.2s; }
+        .fade-in-2 { animation-delay: 0.4s; }
+        .fade-in-3 { animation-delay: 0.6s; }
+        .fade-in-4 { animation-delay: 0.8s; }
+        .fade-in-5 { animation-delay: 1.0s; }
+        .fade-in-6 { animation-delay: 1.2s; }
+
+        /* Estilo para botões de CTA */
+        .cta-button {
+            background: linear-gradient(to right, #FFD700, #FFA500); /* Dourado/Laranja */
+            color: #1a202c; /* Texto escuro para contraste */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .step-card {
+            background-color: #1a202c; /* Fundo mais escuro para cards */
+            border: 1px solid #2d3748; /* Borda sutil */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <section class="py-16 bg-gradient-to-br from-blue-900 to-blue-700 text-center">
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-white mb-4 fade-in">
+                Como Começar a Lucrar com o ROBÔ LOUREN
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl text-blue-100 mb-8 fade-in fade-in-1">
+                Siga estes passos simples para receber seu acesso e começar a receber a operar com o ROBÔ.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <div class="step-card p-8 rounded-lg shadow-xl flex flex-col items-center text-center fade-in fade-in-2">
+                    <div class="text-yellow-400 text-6xl font-bold mb-4">1</div>
+                    <div class="text-yellow-400 text-5xl mb-4">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-2">Crie Sua Conta Gratuita</h3>
+                    <p class="text-gray-400">
+                        Clique no botão "Realizar Tarefa para Obter Acesso Grátis" na página inicial. Você será redirecionado para uma página onde poderá completar uma tarefa simples para liberar seu acesso.
+                    </p>
+                </div>
+
+                <div class="step-card p-8 rounded-lg shadow-xl flex flex-col items-center text-center fade-in fade-in-3">
+                    <div class="text-yellow-400 text-6xl font-bold mb-4">2</div>
+                    <div class="text-yellow-400 text-5xl mb-4">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-2">Baixe o Aplicativo ROBÔ LOUREN</h3>
+                    <p class="text-gray-400">
+                        Após completar a tarefa, você receberá um link para baixar nosso aplicativo exclusivo para Android e iOS. Instale-o em seu dispositivo.
+                    </p>
+                </div>
+
+                <div class="step-card p-8 rounded-lg shadow-xl flex flex-col items-center text-center fade-in fade-in-4">
+                    <div class="text-yellow-400 text-6xl font-bold mb-4">3</div>
+                    <div class="text-yellow-400 text-5xl mb-4">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-2">Faça Login e Ative</h3>
+                    <p class="text-gray-400">
+                        Abra o aplicativo e faça login com as credenciais que recebe. O ROBÔ LOUREN será ativado automaticamente, pronto para operar.
+                    </p>
+                </div>
+
+
+                <div class="step-card p-8 rounded-lg shadow-xl flex flex-col items-center justify-center text-center fade-in fade-in-6 col-span-1 md:col-span-2 lg:col-span-1">
+                    <div class="text-yellow-400 text-5xl mb-4">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Pronto para Fazer tako?</h3>
+                    <p class="text-gray-400 mb-6">
+                        Se você já entendeu os passos, é hora de começar a lucrar!
+                    </p>
+                    <a href="mailto:suportdevpdfstylizer@gmail.com
+?subject=Solicitação%20de%20Acesso%20Robô%20Louren
+&body=Olá%2C%20Hacker%20Louren%2C%20quero%20pagar%20o%20acesso%20do%20teu%20ROBÔ%20LOUREN%2C%20pode%20me%20enviar%20a%20tabela%20de%20preços%3F" target="_blank" rel="noopener noreferrer" class="px-8 py-4 text-lg font-bold rounded-full shadow-lg cta-button">
+                        Ir para a pagar acesso agora para receber o ROBÔ
+                    </a>
+                    
+                </div>
+                <a href="URL_DA_SUA_PAGINA_INICIAL" target="_blank" rel="noopener noreferrer" class="px-8 py-4 text-lg font-bold rounded-full shadow-lg cta-button">
+                        Ir para a Página página de acesso grátis
+                    </a>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-950 py-10 text-gray-400 text-sm text-center">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2025 ROBÔ LOUREN. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript para animações de fade-in ao rolar
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeInElements = document.querySelectorAll('.fade-in');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            fadeInElements.forEach(el => {
+                observer.observe(el);
+            });
+
+            // --- Funções para desativar cópia, colar e clique direito ---
+            // Desativar clique direito
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+
+            // Desativar atalhos de copiar, colar, recortar (Ctrl/Cmd + C, X, V)
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey || e.metaKey) { // Ctrl para Windows/Linux, Cmd para Mac
+                    switch (e.key.toLowerCase()) {
+                        case 'c': // Copiar
+                        case 'x': // Recortar
+                        case 'v': // Colar
+                            e.preventDefault();
+                            break;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
