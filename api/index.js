@@ -9,18 +9,22 @@ const fs         = require('fs');
 const path       = require('path');
 
 const app = express();
-const OCR_SPACE_API_KEY = process.env.OCR_SPACE_API_KEY || 'K85155303888957';
+// Lembre-se: em produção, configure OCR_SPACE_API_KEY como uma variável de ambiente no Vercel.
+// Remova a chave padrão 'K85155303888957' antes do deploy para produção.
+const OCR_SPACE_API_KEY = process.env.OCR_SPACE_API_KEY || 'K85155303888957'; 
 
 // 1. Middlewares
 app.use(cors());
 app.use(express.json());
 
+// Configuração para express-fileupload
+// O diretório /tmp é o único gravável em ambientes serverless como Vercel
 const tmpDir = path.join('/tmp', 'uploads');
 if (!fs.existsSync(tmpDir)) {
   fs.mkdirSync(tmpDir, { recursive: true });
 }
 app.use(fileUpload({
-  limits: { fileSize: 5 * 1024 * 1024 },
+  limits: { fileSize: 5 * 1024 * 1024 }, // Limite de 5MB para o arquivo
   useTempFiles: true,
   tempFileDir: tmpDir
 }));
@@ -32,8 +36,10 @@ app.post('/api/ocr', async (req, res) => {
       return res.status(400).json({ error: 'Nenhum arquivo enviado' });
     }
     const tempPath = req.files.file.tempFilePath;
+    
+    // Verificação adicional para garantir que o arquivo temporário existe
     if (!fs.existsSync(tempPath)) {
-      return res.status(400).json({ error: 'Arquivo temporário não encontrado' });
+      return res.status(400).json({ error: 'Arquivo temporário não encontrado após upload.' });
     }
 
     const form = new FormData();
@@ -44,7 +50,7 @@ app.post('/api/ocr', async (req, res) => {
     const ocrRes = await axios.post(
       'https://api.ocr.space/parse/image',
       form,
-      { headers: form.getHeaders(), timeout: 60000 }
+      { headers: form.getHeaders(), timeout: 60000 } // Timeout de 60 segundos
     );
     const body = ocrRes.data;
 
@@ -52,16 +58,17 @@ app.post('/api/ocr', async (req, res) => {
       const msg = Array.isArray(body.ErrorMessage)
                   ? body.ErrorMessage.join('; ')
                   : body.ErrorMessage;
-      fs.unlink(tempPath, () => {});
+      fs.unlink(tempPath, () => {}); // Tenta limpar o arquivo temporário mesmo em caso de erro
       return res.status(500).json({ error: msg });
     }
 
     const text = body.ParsedResults.map(r => r.ParsedText).join('\n');
-    fs.unlink(tempPath, () => {});
+    fs.unlink(tempPath, () => {}); // Limpa o arquivo temporário após o sucesso
     return res.status(200).json({ text });
 
   } catch (err) {
     console.error('[OCR.space ERROR]', err);
+    // Tenta limpar o arquivo temporário se um erro ocorrer durante o processo
     if (req.files && req.files.file && req.files.file.tempFilePath) {
       fs.unlink(req.files.file.tempFilePath, () => {});
     }
@@ -82,21 +89,23 @@ app.post('/api/validate', (req, res) => {
     const original = text;
     const cleaned = text
       .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/\s+/g, ' ')
+      .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+      .replace(/\s+/g, ' ') // Substitui múltiplos espaços por um único
       .trim()
       .toLowerCase();
 
     const today = new Date();
     const dia = today.getDate();
-    const mes = today.getMonth() + 1;
+    const mes = today.getMonth() + 1; // getMonth() retorna 0-11
     const ano = today.getFullYear();
+    // Regex para a data de hoje, com ou sem zero à esquerda
     const dateRegex = new RegExp(`\\b0?${dia}\\s*\\/\\s*0?${mes}\\s*\\/\\s*${ano}\\b`);
 
     const hasRegistado = cleaned.includes('registado');
-    const hasDate     = dateRegex.test(cleaned);
+    const hasDate      = dateRegex.test(cleaned);
     const hasObrigado = /\bobrigado\b/.test(cleaned);
 
+    // Lógica de validação: 'registado' E (data de hoje OU 'obrigado')
     const approved = (hasRegistado && hasDate) || hasObrigado;
 
     if (approved) {
@@ -114,7 +123,7 @@ app.post('/api/validate', (req, res) => {
           '2. Tente criar de novo',
           '3. Crie nova conta'
         ],
-        debug: { original, cleaned }
+        debug: { original, cleaned, hasRegistado, hasDate, hasObrigado, dateRegex: dateRegex.source } // Adicionado debug para ajudar a entender a validação
       });
     }
 
@@ -127,27 +136,19 @@ app.post('/api/validate', (req, res) => {
   }
 });
 
-// 3. Servir estáticos de public/
+// 3. Servir estáticos de public/ (para CSS, JS, imagens, etc. que têm extensão)
+// As páginas HTML sem extensão serão tratadas pelo vercel.json
 app.use(express.static(path.join(__dirname, '../public')));
 
-// 4. Rota dinâmica para páginas sem .html
-app.get('/:page', (req, res) => {
-  const page = req.params.page;
-  if (page.includes('..')) {
-    return res.status(400).send('Bad Request');
-  }
-  const filePath = path.join(__dirname, '../public', `${page}.html`);
-  if (fs.existsSync(filePath)) {
-    return res.sendFile(filePath);
-  } else {
-    return res.status(404).send('Página não encontrada');
-  }
-});
-
-// 5. Fallback 404
+// 4. Fallback 404
+// Este middleware deve ser o ÚLTIMO, para capturar qualquer requisição não tratada
 app.use((req, res) => {
+  // Se a requisição já foi tratada e os headers enviados, não faça nada
+  if (res.headersSent) {
+    return;
+  }
   res.status(404).send('404 — Nada correspondido');
 });
 
-// 6. Exporta o handler em vez de app.listen
+// 5. Exporta o handler para o Vercel
 module.exports = serverless(app);
