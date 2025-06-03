@@ -1,81 +1,63 @@
-// api/index.js
-const serverless = require('serverless-http');
-const express    = require('express');
+// server.js
+// Servidor Express completo com OCR.space e rotas dinâmicas sem extensão .html
+
+const express = require('express');
 const fileUpload = require('express-fileupload');
-const axios      = require('axios');
-const FormData   = require('form-data');
-const cors       = require('cors');
-const fs         = require('fs');
-const path       = require('path');
+const axios = require('axios');
+const FormData = require('form-data');
+const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
-const OCR_SPACE_API_KEY = process.env.OCR_SPACE_API_KEY || 'K85155303888957'; 
+const port = process.env.PORT || 3000;
 
-// 1. Middlewares globais (sempre no início)
-app.use(cors()); // Permite requisições de outras origens
-app.use(express.json()); // Habilita o parsing de JSON no corpo das requisições
+// Sua chave do OCR.space
+const OCR_SPACE_API_KEY = 'K85155303888957';
 
-// Configuração para express-fileupload (para uploads de arquivos)
-const tmpDir = path.join('/tmp', 'uploads'); // Diretório temporário gravável no Vercel
-if (!fs.existsSync(tmpDir)) {
-  fs.mkdirSync(tmpDir, { recursive: true });
-}
+// --- Middlewares ---
+app.use(cors());
+app.use(express.json());
 app.use(fileUpload({
-  limits: { fileSize: 5 * 1024 * 1024 }, // Limite de 5MB
-  useTempFiles: true, // Usa arquivos temporários
-  tempFileDir: tmpDir // Define o diretório temporário
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+  useTempFiles: true,
+  tempFileDir: '/tmp/'
 }));
 
-// --- 2. Rotas de API (as mais específicas, vêm antes dos estáticos) ---
-// Rota para OCR
+// --- OCR via OCR.space API ---
 app.post('/api/ocr', async (req, res) => {
   try {
     if (!req.files || !req.files.file) {
       return res.status(400).json({ error: 'Nenhum arquivo enviado' });
     }
-    const tempPath = req.files.file.tempFilePath;
-    
-    if (!fs.existsSync(tempPath)) {
-      return res.status(400).json({ error: 'Arquivo temporário não encontrado após upload.' });
-    }
 
     const form = new FormData();
     form.append('apikey', OCR_SPACE_API_KEY);
     form.append('language', 'por');
-    form.append('file', fs.createReadStream(tempPath));
+    form.append('file', fs.createReadStream(req.files.file.tempFilePath));
 
-    const ocrRes = await axios.post(
-      'https://api.ocr.space/parse/image',
-      form,
-      { headers: form.getHeaders(), timeout: 60000 }
-    );
+    const ocrRes = await axios.post('https://api.ocr.space/parse/image', form, {
+      headers: form.getHeaders(),
+      timeout: 60000,
+    });
+
     const body = ocrRes.data;
-
     if (body.IsErroredOnProcessing) {
-      const msg = Array.isArray(body.ErrorMessage)
-                  ? body.ErrorMessage.join('; ')
-                  : body.ErrorMessage;
-      fs.unlink(tempPath, () => {});
-      return res.status(500).json({ error: msg });
+      return res.status(500).json({ error: body.ErrorMessage.join('; ') });
     }
 
     const text = body.ParsedResults.map(r => r.ParsedText).join('\n');
-    fs.unlink(tempPath, () => {});
-    return res.status(200).json({ text });
+    // opcional: limpar temp file
+    fs.unlink(req.files.file.tempFilePath, () => {});
 
+    return res.json({ text });
   } catch (err) {
     console.error('[OCR.space ERROR]', err);
-    if (req.files && req.files.file && req.files.file.tempFilePath) {
-      fs.unlink(req.files.file.tempFilePath, () => {});
-    }
-    return res.status(500).json({
-      error: 'Falha no OCR externo',
-      details: err.message
-    });
+    return res.status(500).json({ error: 'Falha no OCR externo', details: err.message });
   }
 });
 
-// Rota para Validação
+// --- Rota de validação (normalize, fallback Obrigado, debug) ---
 app.post('/api/validate', (req, res) => {
   try {
     const { text } = req.body;
@@ -86,112 +68,54 @@ app.post('/api/validate', (req, res) => {
     const original = text;
     const cleaned = text
       .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[̀-\u036f]/g, '')
       .replace(/\s+/g, ' ')
       .trim()
       .toLowerCase();
 
     const today = new Date();
-    const dia = today.getDate();
-    const mes = today.getMonth() + 1;
-    const ano = today.getFullYear();
-    const dateRegex = new RegExp(`\\b0?${dia}\\s*\\/\\s*0?${mes}\\s*\\/\\s*${ano}\\b`);
+    const formattedDate = `${String(today.getDate()).padStart(2,'0')}/` +
+                          `${String(today.getMonth()+1).padStart(2,'0')}/` +
+                          `${today.getFullYear()}`;
 
-    const hasRegistado = cleaned.includes('registado');
-    const hasDate      = dateRegex.test(cleaned);
+    const required = ['registado', formattedDate.toLowerCase()];
+    const hasAllRequired = required.every(w => cleaned.includes(w));
     const hasObrigado = /\bobrigado\b/.test(cleaned);
-
-    const approved = (hasRegistado && hasDate) || hasObrigado;
+    const approved = hasAllRequired || hasObrigado;
 
     if (approved) {
-      return res.status(200).json({
+      return res.json({
         approved: true,
-        message: 'Seu acesso: Nome: GoodBot Senha: 654321',
-        guideLink: 'https://www.mediafire.com/file/c5xy3yuthu9oil1/SEO_HACKER_AVIATOR_1.0.apk/file'
+        guideLink: 'https://www.mediafire.com/file/zvy5z1jdow995aj/10_Ferramentas_de_Apostas_online_para_iniciantes.pdf/file'
       });
     } else {
-      return res.status(401).json({
+      return res.json({
         approved: false,
-        errors: [
-          'Erro na validação. Verifique:',
-          '1. Se criou a conta pelo link fornecido',
-          '2. Tente criar de novo',
-          '3. Crie nova conta'
-        ],
-        debug: { original, cleaned, hasRegistado, hasDate, hasObrigado, dateRegex: dateRegex.source }
+        message: 'Erro na validação. Verifique:\n1. Se criou a conta pelo link fornecido\n2. Tente criar de novo\n3. Crie nova conta',
+        debug: { original, cleaned }
       });
     }
-
   } catch (err) {
     console.error('[VALIDATE ERROR]', err);
-    return res.status(500).json({
-      error: 'Erro interno na validação',
-      details: err.message
-    });
+    return res.status(500).json({ error: 'Erro interno na validação', details: err.message });
   }
 });
 
-// --- 3. Servir arquivos estáticos (CSS, JS, imagens, HTML COM EXTENSÃO) ---
-// Este middleware é responsável por servir TUDO da pasta 'public' que tenha um nome de arquivo explícito
-// (incluindo extensões como .html, .css, .js, .png, .jpg, etc.).
-// Ele deve vir DEPOIS das rotas de API, mas ANTES das rotas dinâmicas/catch-all para HTML sem extensão.
-app.use(express.static(path.join(__dirname, '../public')));
+// --- Rotas dinâmicas para servir páginas sem .html ---
+app.get(['/', '/:page'], (req, res) => {
+  let page = req.params.page || 'index';
+  // prevenir acesso a caminhos fora de public
+  if (page.includes('..')) return res.status(400).send('Bad Request');
 
-
-// --- 4. Rota Específica para a Página Inicial (se /index.html existir e quiser servir como /) ---
-// Esta rota é útil para garantir que 'public/index.html' seja servido quando a URL for apenas '/'
-app.get('/', (req, res, next) => {
-    const indexPath = path.join(__dirname, '../public', 'index.html');
-    if (fs.existsSync(indexPath)) {
-        return res.sendFile(indexPath);
-    }
-    next(); // Se não encontrar index.html, passa para o próximo middleware
-});
-
-
-// --- 5. Rota Dinâmica para Páginas HTML SEM .html (Ex: /sobre -> /public/sobre.html) ---
-// Esta rota vem DEPOIS de `express.static` e da rota da página inicial,
-// para não "engolir" os arquivos estáticos ou a rota da home.
-app.get('/:page', (req, res, next) => {
-  const page = req.params.page;
-
-  // Segurança: Evitar "directory traversal" (acesso a arquivos fora do public)
-  // E também evitar que essa rota genérica pegue URLs de API ou arquivos estáticos já tratados.
-  if (page.includes('..') || page.includes('/') || page.startsWith('api') || page.includes('.')) { 
-    return next(); // Se contiver barra, '..', começar com 'api' ou tiver uma extensão (.), passe para o próximo.
-  }
-
-  const filePath = path.join(__dirname, '../public', `${page}.html`);
-
-  // Log para depuração (remova em produção)
-  console.log(`[DEBUG - Server HTML] Tentando acessar: ${filePath}`);
-
+  const filePath = path.join(__dirname, 'public', `${page}.html`);
   if (fs.existsSync(filePath)) {
-    console.log(`[DEBUG - Server HTML] Arquivo encontrado: ${filePath}`);
-    return res.sendFile(filePath, (err) => {
-      if (err) {
-        console.error(`[ERROR - Server HTML] Erro ao enviar arquivo ${filePath}:`, err);
-        if (!res.headersSent) {
-          res.status(500).send('Erro interno do servidor ao servir página');
-        }
-      }
-    });
-  } else {
-    // Se não encontrou o HTML, passe para o próximo middleware (o 404 handler)
-    console.log(`[DEBUG - Server HTML] Arquivo NÃO encontrado para: /${page}.html`);
-    next(); 
+    return res.sendFile(filePath);
   }
+  // se não existir, 404
+  res.status(404).send('Página não encontrada');
 });
 
-
-// --- 6. Fallback para 404 ---
-// Este middleware deve ser o ÚLTIMO na cadeia de rotas do Express.
-app.use((req, res) => {
-  if (res.headersSent) { // Previne erro se os headers já foram enviados por uma rota anterior
-    return;
-  }
-  res.status(404).send('404 — Nada correspondido');
+// --- Iniciar servidor ---
+app.listen(port, () => {
+  console.log(`Servidor rodando em http://localhost:${port}/`);
 });
-
-// 7. Exporta o handler para o Vercel
-module.exports = serverless(app);
