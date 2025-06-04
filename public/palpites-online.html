@@ -61,9 +61,52 @@
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
         }
+
+        /* --- Estilos para desabilitar seleção/cópia e arrastar --- */
+        body {
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none;    /* Firefox */
+            -ms-user-select: none;     /* Internet Explorer/Edge */
+            user-select: none;         /* Standard */
+            -webkit-touch-callout: none; /* iOS Safari para não mostrar menu de ação ao segurar */
+        }
+
+        img {
+            -webkit-user-drag: none; /* Safari */
+            -moz-user-drag: none;    /* Firefox */
+            -ms-user-drag: none;     /* Internet Explorer/Edge */
+            user-drag: none;         /* Standard */
+            pointer-events: none;    /* Impede interação direta com o mouse em algumas situações */
+            -webkit-touch-callout: none; /* Evita menu ao segurar em touch */
+        }
     </style>
 </head>
 <body class="bg-darkBg text-lightText font-sans leading-relaxed">
+
+    <script>
+        // Desabilitar o clique direito (menu de contexto)
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // Desabilitar combinações de teclado para copiar (Ctrl+C, Cmd+C, etc.)
+        document.addEventListener('keydown', event => {
+            if (event.ctrlKey && (event.key === 'c' || event.key === 'C' || event.key === 'u' || event.key === 'U' || event.key === 's' || event.key === 'S')) {
+                event.preventDefault();
+            }
+            if (event.metaKey && (event.key === 'c' || event.key === 'C' || event.key === 'u' || event.key === 'U' || event.key === 's' || event.key === 'S')) { // Para Mac (Cmd)
+                event.preventDefault();
+            }
+            // Desabilitar F12 (ferramentas de desenvolvedor)
+            if (event.key === 'F12') {
+                event.preventDefault();
+            }
+        });
+
+        // Adicionar classes para imagens (se necessário, embora os estilos CSS acima já ajudem)
+        // const images = document.querySelectorAll('img');
+        // images.forEach(img => {
+        //     img.setAttribute('draggable', 'false'); // Impede arrastar imagens
+        // });
+    </script>
 
     <header class="hero py-20 px-5 text-center text-lightText">
         <div class="container mx-auto max-w-5xl">
@@ -132,7 +175,13 @@
                         <img src="perfil1.jpg" alt="Foto" class="w-14 h-14 rounded-full object-cover border-2 border-primary">
                         <span class="font-bold text-lightText">Marcos Murera</span>
                     </div>
-                    
+                </div>
+                <div class="testimonial-card bg-gray-800 p-6 rounded-lg shadow-lg text-left hover:scale-105">
+                    <p class="italic mb-4 text-gray-400">"Amei esse grupo. muito obrigado, Agora tô a apostar como um expert e no último mês ganhei 4 bilhetes que devolveu todo meu dinheiro que perdi"</p>
+                    <div class="flex items-center gap-4">
+                        <img src="perfil5.jpg" alt="Foto" class="w-14 h-14 rounded-full object-cover border-2 border-primary">
+                        <span class="font-bold text-lightText">Pablo da favela</span>
+                    </div>
                 </div>
                 <div class="testimonial-card bg-gray-800 p-6 rounded-lg shadow-lg text-left hover:scale-105">
                     <p class="italic mb-4 text-gray-400">"No início fiquei cético, mas os resultados falam por si. Já recuperei o que perdi e estou com lucros. O grupo é super ativo e as dicas são de ouro!"</p>
@@ -140,18 +189,15 @@
                         <img src="perfil2.jpg" alt="Foto" class="w-14 h-14 rounded-full object-cover border-2 border-primary">
                         <span class="font-bold text-lightText">João pedro</span>
                     </div>
-
                 </div>
-               <div class="testimonial-card bg-gray-800 p-6 rounded-lg shadow-lg text-left hover:scale-105">
+                <div class="testimonial-card bg-gray-800 p-6 rounded-lg shadow-lg text-left hover:scale-105">
                     <p class="italic mb-4 text-gray-400">"obrigado por apoio, ultimamente não tem Sido fácil ganhar nas apostas mas com tuas dicas está fácil agora"</p>
                     <div class="flex items-center gap-4">
-                        <img src="perfil2.jpg" alt="Foto" class="w-14 h-14 rounded-full object-cover border-2 border-primary">
+                        <img src="perfil4.jpg" alt="Foto" class="w-14 h-14 rounded-full object-cover border-2 border-primary">
                         <span class="font-bold text-lightText">Taquale sumail</span>
                     </div>
-
                 </div>
-                </div>
-                </div>
+            </div>
         </div>
     </section>
 
@@ -197,12 +243,12 @@
 
     <footer class="footer py-10 px-5 bg-black text-grayText text-sm text-center">
         <div class="container mx-auto">
-            <p class="mb-2 font-semibold text-red-400">**Aviso Importante:** Apostar é um entretenimento. Jogue com responsabilidade. Apenas para maiores de 18 anos.</p>
+            <p class="mb-2 font-semibold text-red-400">Aviso Importante: Apostar é um entretenimento. Jogue com responsabilidade. Apenas para maiores de 18 anos.</p>
             <p class="mb-4">Se precisar de ajuda, procure organizações de apoio ao jogo responsável.</p>
             <p>&copy; 2025 Palpites Vencedores. Todos os direitos reservados.</p>
             <p class="mt-4">
-                <a href="#top" class="text-primary hover:underline mx-2">Voltar ao Topo</a> |
-                <a href="#" class="text-primary hover:underline mx-2">Política de Privacidade</a> </p>
+                <a href="#top" class="text-primary hover:underline mx-2">Voltar ao Topo</a>
+            </p>
         </div>
     </footer>
 
