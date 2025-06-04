@@ -31,7 +31,7 @@
     <style>
         /* Estilos customizados que o Tailwind não cobre diretamente ou para elementos específicos */
         .hero {
-            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://iili.io/FJihpqu.jpg'); /* URL da imagem principal */
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://iili.io/FJihpqu.jpg'); /* URL da imagem gerada */
             background-size: cover;
             background-position: center;
             animation: fadeIn 1s ease-in-out; /* Animação de fade-in */
@@ -84,7 +84,10 @@
 <body class="bg-darkBg text-lightText font-sans leading-relaxed">
 
     <script>
+        // Desabilitar o clique direito (menu de contexto)
         document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // Desabilitar combinações de teclado para copiar (Ctrl+C, Cmd+C, etc.)
         document.addEventListener('keydown', event => {
             if (event.ctrlKey && (event.key === 'c' || event.key === 'C' || event.key === 'u' || event.key === 'U' || event.key === 's' || event.key === 'S')) {
                 event.preventDefault();
@@ -92,13 +95,20 @@
             if (event.metaKey && (event.key === 'c' || event.key === 'C' || event.key === 'u' || event.key === 'U' || event.key === 's' || event.key === 'S')) { // Para Mac (Cmd)
                 event.preventDefault();
             }
+            // Desabilitar F12 (ferramentas de desenvolvedor)
             if (event.key === 'F12') {
                 event.preventDefault();
             }
         });
+
+        // Adicionar classes para imagens (se necessário, embora os estilos CSS acima já ajudem)
+        // const images = document.querySelectorAll('img');
+        // images.forEach(img => {
+        //     img.setAttribute('draggable', 'false'); // Impede arrastar imagens
+        // });
     </script>
 
-    <header class="hero py-16 sm:py-20 px-4 sm:px-6 md:px-8 text-center text-lightText">
+    <header class="hero py-20 px-5 text-center text-lightText">
         <div class="container mx-auto max-w-5xl">
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 text-primary drop-shadow-lg">Transforme Suas Apostas em Ganhos Reais!</h1>
             <p class="text-lg sm:text-xl mb-8 max-w-3xl mx-auto">Receba <strong class="text-primary">2 bilhetes de apostas diários</strong> com alta taxa de acerto e comece a apostar com confiança. Junte-se ao nosso grupo <strong class="text-primary">GRÁTIS</strong>!</p>
@@ -106,11 +116,11 @@
         </div>
     </header>
 
-    <section class="problem-solution py-12 sm:py-16 px-4 sm:px-6 md:px-8 bg-cardBg text-center">
+    <section class="problem-solution py-16 px-5 bg-cardBg text-center">
         <div class="container mx-auto max-w-5xl">
-            <h2 class="text-3xl sm:text-4xl font-bold mb-8 sm:mb-10 text-primary">Cansado de Perder Dinheiro em Apostas?</h2>
+            <h2 class="text-3xl sm:text-4xl font-bold mb-10 text-primary">Cansado de Perder Dinheiro em Apostas?</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
-                <div class="bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg text-left max-w-lg w-full">
+                <div class="bg-gray-800 p-8 rounded-lg shadow-lg text-left max-w-lg w-full">
                     <h3 class="text-2xl font-semibold mb-4 text-primary">O Problema:</h3>
                     <ul class="list-none p-0 mt-5">
                         <li class="relative pl-7 mb-3 before:content-['✓'] before:absolute before:left-0 before:text-primary before:font-bold">Apostar sem conhecimento leva a perdas constantes.</li>
@@ -119,7 +129,7 @@
                         <li class="relative pl-7 mb-3 before:content-['✓'] before:absolute before:left-0 before:text-primary before:font-bold">Sentimento de apostar no escuro, sem estratégia.</li>
                     </ul>
                 </div>
-                <div class="bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg text-left max-w-lg w-full">
+                <div class="bg-gray-800 p-8 rounded-lg shadow-lg text-left max-w-lg w-full">
                     <h3 class="text-2xl font-semibold mb-4 text-primary">A Solução:</h3>
                     <ul class="list-none p-0 mt-5">
                         <li class="relative pl-7 mb-3 before:content-['✓'] before:absolute before:left-0 before:text-primary before:font-bold">Nossa equipa de especialistas faz a análise por você.</li>
@@ -132,21 +142,21 @@
         </div>
     </section>
 
-    <section class="how-it-works py-12 sm:py-16 px-4 sm:px-6 md:px-8 bg-darkBg text-center">
+    <section class="how-it-works py-16 px-5 bg-darkBg text-center">
         <div class="container mx-auto max-w-5xl">
-            <h2 class="text-3xl sm:text-4xl font-bold mb-8 sm:mb-10 text-primary">Como Funciona a Sua Jornada de Sucesso</h2>
+            <h2 class="text-3xl sm:text-4xl font-bold mb-10 text-primary">Como Funciona a Sua Jornada de Sucesso</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center mt-10">
-                <div class="step bg-cardBg p-6 sm:p-8 rounded-lg shadow-lg max-w-sm w-full hover:scale-105">
+                <div class="step bg-cardBg p-8 rounded-lg shadow-lg max-w-sm w-full hover:scale-105">
                     <div class="bg-primary text-darkBg rounded-full w-14 h-14 flex items-center justify-center text-3xl font-bold mx-auto mb-5">1</div>
                     <h3 class="text-xl font-semibold mb-3 text-lightText">Entre no Grupo VIP</h3>
                     <p class="text-grayText">Clique no botão abaixo e seja adicionado ao nosso grupo exclusivo no <strong class="text-lightText">WhatsApp/Telegram</strong> (você decide qual plataforma quer oferecer ou se oferece as duas).</p>
                 </div>
-                <div class="step bg-cardBg p-6 sm:p-8 rounded-lg shadow-lg max-w-sm w-full hover:scale-105">
+                <div class="step bg-cardBg p-8 rounded-lg shadow-lg max-w-sm w-full hover:scale-105">
                     <div class="bg-primary text-darkBg rounded-full w-14 h-14 flex items-center justify-center text-3xl font-bold mx-auto mb-5">2</div>
                     <h3 class="text-xl font-semibold mb-3 text-lightText">Receba 2 Palpites Diários</h3>
                     <p class="text-grayText">Todos os dias, nossa equipa envia 2 bilhetes de apostas detalhados, prontos para você copiar e usar.</p>
                 </div>
-                <div class="step bg-cardBg p-6 sm:p-8 rounded-lg shadow-lg max-w-sm w-full hover:scale-105">
+                <div class="step bg-cardBg p-8 rounded-lg shadow-lg max-w-sm w-full hover:scale-105">
                     <div class="bg-primary text-darkBg rounded-full w-14 h-14 flex items-center justify-center text-3xl font-bold mx-auto mb-5">3</div>
                     <h3 class="text-xl font-semibold mb-3 text-lightText">Faça Sua Aposta!</h3>
                     <p class="text-grayText">Com um clique, acesse a casa de apostas parceira e faça sua aposta. Simples, rápido e eficiente!</p>
@@ -155,10 +165,10 @@
         </div>
     </section>
 
-    <section class="testimonials py-12 sm:py-16 px-4 sm:px-6 md:px-8 bg-cardBg text-center" id="depoimentos">
+    <section class="testimonials py-16 px-5 bg-cardBg text-center" id="depoimentos">
         <div class="container mx-auto max-w-5xl">
-            <h2 class="text-3xl sm:text-4xl font-bold mb-8 sm:mb-10 text-primary">O Que Nossos Membros Dizem: Resultados Reais!</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-10 text-primary">O Que Nossos Membros Dizem</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="testimonial-card bg-gray-800 p-6 rounded-lg shadow-lg text-left hover:scale-105">
                     <p class="italic mb-4 text-gray-400">"Estava cansado de perder! Desde que entrei no grupo, minha banca só cresce. Os palpites são incríveis e super claros. Recomendo a todos!"</p>
                     <div class="flex items-center gap-4">
@@ -191,9 +201,9 @@
         </div>
     </section>
 
-    <section class="offer-differentiators py-12 sm:py-16 px-4 sm:px-6 md:px-8 bg-darkBg text-center">
+    <section class="offer-differentiators py-16 px-5 bg-darkBg text-center">
         <div class="container mx-auto max-w-5xl">
-            <h2 class="text-3xl sm:text-4xl font-bold mb-8 sm:mb-10 text-primary">Por Que Nossos Palpites São Diferentes?</h2>
+            <h2 class="text-3xl sm:text-4xl font-bold mb-10 text-primary">Por Que Nossos Palpites São Diferentes?</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-10">
                 <div class="offer-item bg-cardBg p-6 rounded-lg shadow-lg text-center text-grayText hover:scale-105">
                     <h3 class="text-xl font-semibold mb-3 text-primary">Análise Especializada</h3>
@@ -215,7 +225,7 @@
         </div>
     </section>
 
-    <section class="final-cta py-12 sm:py-16 px-4 sm:px-6 md:px-8 bg-cardBg text-center">
+    <section class="final-cta py-16 px-5 bg-cardBg text-center">
         <div class="container mx-auto max-w-3xl">
             <h2 class="text-3xl sm:text-4xl font-bold mb-8 text-lightText">Pronto para Parar de Perder e Começar a Vencer?</h2>
             <p class="mb-8 text-lg">Junte-se à nossa comunidade e transforme suas apostas hoje mesmo!</p>
@@ -227,11 +237,11 @@
                     QUERO FAZER MINHA PRIMEIRA APOSTA AGORA! (Com Bônus)
                 </a>
             </div>
-            <p class="mt-8 text-base text-grayText">Recomendamos: <strong class="text-lightText">A BetVivo</strong> para você começar a apostar com bônus</p>
+            <p class="mt-8 text-base text-grayText">Recomendamos: <strong class="text-lightText">[Nome da Casa de Apostas Principal]</strong> para você começar a apostar com nossos palpites!</p>
         </div>
     </section>
 
-    <footer class="footer py-8 sm:py-10 px-4 sm:px-6 md:px-8 bg-black text-grayText text-sm text-center">
+    <footer class="footer py-10 px-5 bg-black text-grayText text-sm text-center">
         <div class="container mx-auto">
             <p class="mb-2 font-semibold text-red-400">Aviso Importante: Apostar é um entretenimento. Jogue com responsabilidade. Apenas para maiores de 18 anos.</p>
             <p class="mb-4">Se precisar de ajuda, procure organizações de apoio ao jogo responsável.</p>
