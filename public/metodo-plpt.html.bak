@@ -30,31 +30,31 @@
             font-size: 0.75rem; /* Base text-sm */
         }
         h1 {
-            font-size: 1.75rem !important; /* Ajuste para o h1 */
+            font-size: 0.85rem !important; /* Mais um ajuste para menor no h1 */
             line-height: 1.1;
         }
         h2 {
-            font-size: 1.5rem !important; /* Ajuste para o h2 */
+            font-size: 0.7rem !important; /* Mais um ajuste para menor no h2 */
         }
         h3 {
-            font-size: 0.9rem !important; /* Ajuste para o h3 */
+            font-size: 0.7rem !important; /* Ajuste para ser visivelmente menor que h2 */
         }
-        /* Ajuste específico para o parágrafo "Seja bem-vindo(a)!" */
-        .welcome-text {
-            font-size: 0.8rem; /* Tamanho um pouco maior que o padrão para o parágrafo */
+        p {
+            font-size: 0.7rem; /* Um pouco menor que o padrão */
         }
 
         /* Reduzindo o tamanho do texto dos botões */
         .btn-text-small {
-            font-size: 0.7rem !important; /* Tamanho da fonte menor para os botões */
-            padding-top: 0.4rem !important; /* Reduzindo padding vertical */
-            padding-bottom: 0.4rem !important; /* Reduzindo padding vertical */
-            padding-left: 1rem !important; /* Reduzindo padding horizontal */
-            padding-right: 1rem !important; /* Reduzindo padding horizontal */
+            font-size: 0.75rem !important; /* Tamanho da fonte menor para os botões */
+            padding-top: 0.5rem !important; /* Reduzindo padding vertical */
+            padding-bottom: 0.5rem !important; /* Reduzindo padding vertical */
+            padding-left: 1.25rem !important; /* Reduzindo padding horizontal */
+            padding-right: 1.25rem !important; /* Reduzindo padding horizontal */
         }
 
+
         .hero-image {
-            /* Substitua 'logo4.webp' pelo seu URL real da imagem principal */
+            /* Substitua 'SEU_LINK_DA_IMAGEM_AQUI' por uma imagem relevante de apostas/ganhos */
             background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('logo4.webp');
             background-size: cover;
             background-position: center;
@@ -66,10 +66,10 @@
         }
         
         .testimonial-image {
-            width: 100px; /* Aumentando o tamanho das imagens dos testemunhos */
-            height: 100px;
+            width: 80px; /* Tamanho ainda menor para as imagens dos testemunhos */
+            height: 80px;
             object-fit: cover;
-            border-radius: 5px; /* Aumentando um pouco o raio para acompanhar o tamanho */
+            border-radius: 2px;
             flex-shrink: 0;
             border: 2px solid #10B981; /* Borda mais fina */
         }
@@ -77,8 +77,8 @@
         .testimonials-container {
             display: flex;
             overflow-x: auto;
-            gap: 20px; /* Aumentando um pouco o espaçamento */
-            padding-bottom: 15px; /* Aumentando um pouco o padding inferior */
+            gap: 16px; /* Espaçamento menor */
+            padding-bottom: 12px;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
         }
@@ -89,17 +89,17 @@
 
         /* Estilização do scrollbar (Webkit) - Mantida para clareza, mas ajustada para ser mais fina */
         .testimonials-container::-webkit-scrollbar {
-            height: 8px; /* Aumentando a altura da barra de rolagem */
+            height: 6px;
         }
 
         .testimonials-container::-webkit-scrollbar-track {
             background: #E5E7EB;
-            border-radius: 8px;
+            border-radius: 6px;
         }
 
         .testimonials-container::-webkit-scrollbar-thumb {
             background-color: #10B981;
-            border-radius: 8px;
+            border-radius: 6px;
             border: 1px solid #E5E7EB;
         }
 
@@ -122,18 +122,15 @@
 </head>
 <body class="bg-gray-50 font-sans text-gray-800">
     <header class="max-w-7xl mx-auto px-4 py-12 md:py-16">
-        <div class="text-center">
-            <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 leading-tight">
+        <div class="text-center"> <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 leading-tight">
                 Domine as Apostas Online com o <span class="text-primary">Método Expert</span> para Iniciantes!
             </h1>
             
-            <p class="welcome-text text-gray-600 max-w-2xl mx-auto mb-6 text-left"> Seja bem-vindo(a)! Se você está começando no mundo das apostas online, chegou ao lugar certo.
+            <p class="text-base text-gray-600 max-w-2xl mx-auto mb-6 text-left"> Seja bem-vindo(a)! Se você está começando no mundo das apostas online, chegou ao lugar certo.
                 Descubra nosso método **100% Funcional** que te dará as bases para apostar com inteligência e responsabilidade.
             </p>
 
-            <div class="hero-image w-full h-48 md:h-64 rounded-lg shadow-md mb-8 mx-auto"></div>
-            
-            <a href="/atendimento-guia-apostas" target="_blank" class="bg-primary hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105 btn-text-small inline-flex items-center justify-center">
+            <div class="hero-image w-full h-48 md:h-64 rounded-lg shadow-md mb-8 mx-auto"></div> <a href="/atendimento-guia-apostas" target="_blank" class="bg-primary hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105 btn-text-small inline-flex items-center justify-center">
                 Quero Acessar o Método usando Assistente online!
                 <i class="fas fa-arrow-right ml-2"></i>
             </a>
@@ -144,8 +141,7 @@
 
     <section class="bg-white py-12 md:py-16">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-12 text-center">
-                Veja como o <span class="text-primary">Método Funciona</span> em 3 Passos Simples
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-12 text-center"> Veja como o <span class="text-primary">Método Funciona</span> em 3 Passos Simples
             </h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -198,16 +194,14 @@
 
     <section class="py-12 bg-gray-50 md:py-16">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
-                Pronto para <span class="text-primary">Transformar</span> Suas Apostas?
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center"> Pronto para <span class="text-primary">Transformar</span> Suas Apostas?
             </h2>
-            <div class="flex flex-col md:flex-row justify-center gap-4">
-                <a href="https://media1.placard.co.mz/redirect.aspx?pid=5905&bid=1690" target="_blank" class="bg-accent hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105 btn-text-small inline-flex items-center justify-center">
+            <div class="flex flex-col md:flex-row justify-center gap-4"> <a href="https://media1.placard.co.mz/redirect.aspx?pid=5905&bid=1690" target="_blank" class="bg-accent hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105 btn-text-small inline-flex items-center justify-center">
                     <i class="fas fa-external-link-alt mr-2"></i> 
                     Acessar Link de Cadastro e Bônus
                 </a>
                 
-                <a href="https://wa.me/870202842?text= Olá quero receber o Método plpt" target="_blank" class="bg-whatsapp hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105 btn-text-small inline-flex items-center justify-center">
+                <a href="https://wa.me/870202842'msg' Olá quero receber o Método plpt" target="_blank" class="bg-whatsapp hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105 btn-text-small inline-flex items-center justify-center">
                     <i class="fab fa-whatsapp mr-2"></i> 
                    Obter o método usando Whatsapp 
                 </a>
@@ -231,7 +225,8 @@
                 <img src="test3.webp" alt="Usuário Satisfeito 3" class="testimonial-image">
 
                 <img src="test4.webp" alt="Usuário Satisfeito 4" class="testimonial-image">
-            </div>
+
+                </div>
         </div>
     </section>
 
@@ -244,7 +239,7 @@
                     <h3 class="text-xl font-bold text-primary">Método Expert</h3>
                     <p class="text-gray-400 mt-1 text-sm">Do iniciante ao Expert em Apostas Online.</p>
                 </div>
-            </div>
+                </div>
             <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-500 text-xs">
                 <p>&copy; 2025 Método Expert. Todos os direitos reservados. | Aposte com responsabilidade.</p>
             </div>
