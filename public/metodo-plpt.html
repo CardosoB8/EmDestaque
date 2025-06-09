@@ -28,6 +28,13 @@
         /* Ajustes para um visual "pequenininho" */
         body {
             font-size: 0.75rem; /* Base text-sm */
+            /* Desabilita seleção de texto e arrastar em todo o corpo */
+            -webkit-user-select: none;  /* Safari */
+            -moz-user-select: none;     /* Firefox */
+            -ms-user-select: none;      /* Internet Explorer/Edge */
+            user-select: none;          /* Standard */
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-drag: none;    /* Safari */
         }
         h1 {
             font-size: 0.75rem !important; /* Ajuste para o h1 */
@@ -63,6 +70,9 @@
             height: 180px; /* Altura menor para a imagem principal */
             margin-left: auto; /* Garante que a imagem se centre se o contêiner for text-left */
             margin-right: auto;
+            /* Desabilita arrastar a imagem */
+            -webkit-user-drag: none;
+            user-drag: none;
         }
         
         .testimonial-image {
@@ -72,6 +82,9 @@
             border-radius: 5px; /* Aumentando um pouco o raio para acompanhar o tamanho */
             flex-shrink: 0;
             border: 2px solid #10B981; /* Borda mais fina */
+            /* Desabilita arrastar a imagem */
+            -webkit-user-drag: none;
+            user-drag: none;
         }
 
         .testimonials-container {
@@ -140,8 +153,6 @@
         </div>
     </header>
 
-    
-
     <section class="bg-white py-12 md:py-16">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-12 text-center">
@@ -158,7 +169,7 @@
                         Comece abrindo sua conta através do nosso **link exclusivo**. Você receberá um **bônus generoso** no seu primeiro depósito de 200 MT ou mais, duplicando seu saldo inicial! Por exemplo, deposite 200 MT e comece com 400 MT!
                     </p>
                     <p class="text-xs font-medium text-red-500 mb-3">
-                        <i class="fas fa-exclamation-triangle mr-1"></i> Não esqueça de nos enviar o comprovante do seu primeiro depósito para validar o bônus!
+                        <i class="fas fa-exclamation-triangle mr-1"></i> Não esqueça de nos enviar o comprovante do seu primeiro depósito para receber o Método 
                     </p>
                     <div class="text-primary text-3xl mt-auto">
                         <i class="fas fa-money-check-alt"></i>
@@ -194,8 +205,6 @@
         </div>
     </section>
 
-    
-
     <section class="py-12 bg-gray-50 md:py-16">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
@@ -207,15 +216,13 @@
                     Acessar Link de Cadastro e Bônus
                 </a>
                 
-                <a href="https://wa.me/870202842?text= Olá quero receber o Método plpt" target="_blank" class="bg-whatsapp hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105 btn-text-small inline-flex items-center justify-center">
+                <a href="https://wa.me/258870202842?text=Olá%20quero%20receber%20o%20Método%20plpt" target="_blank" class="bg-whatsapp hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105 btn-text-small inline-flex items-center justify-center">
                     <i class="fab fa-whatsapp mr-2"></i> 
-                   Obter o método usando Whatsapp 
+                    Obter o método usando Whatsapp 
                 </a>
             </div>
         </div>
     </section>
-
-    
 
     <section class="py-12 bg-white md:py-16">
         <div class="max-w-7xl mx-auto px-4">
@@ -235,8 +242,6 @@
         </div>
     </section>
 
-    
-
     <footer class="bg-secondary text-white py-8 md:py-12">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center mb-6">
@@ -250,5 +255,50 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Desabilita o clique com o botão direito do mouse (context menu)
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Desabilita a seleção de texto e cópia
+        document.addEventListener('keydown', function(e) {
+            // Previne Ctrl+C, Cmd+C (macOS)
+            if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
+                e.preventDefault();
+            }
+            // Previne Ctrl+A, Cmd+A (macOS)
+            if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+                e.preventDefault();
+            }
+            // Previne Ctrl+U, Cmd+U (macOS) - Ver código fonte
+            if ((e.ctrlKey || e.metaKey) && e.key === 'u') {
+                e.preventDefault();
+            }
+            // Previne F12 - Ferramentas de desenvolvedor
+            if (e.key === 'F12') {
+                e.preventDefault();
+            }
+            // Previne Ctrl+Shift+I, Cmd+Option+I (macOS) - Ferramentas de desenvolvedor
+            if ((e.ctrlKey && e.shiftKey && e.key === 'i') || (e.metaKey && e.altKey && e.key === 'i')) {
+                e.preventDefault();
+            }
+        });
+
+        // Desabilita arrastar imagens especificamente, caso o CSS não seja suficiente em todos os browsers
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+            });
+        });
+
+        // Previne o download via clique com o botão direito em links com atributos de download (se houver)
+        document.querySelectorAll('a[download]').forEach(link => {
+            link.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+        });
+    </script>
 </body>
 </html>
