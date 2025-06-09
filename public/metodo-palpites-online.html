@@ -3,292 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Método comprovado para Apostas: Palpites Vencedores Diários</title>
+    <title>Método Expert | Apostas Online para Iniciantes (Compacto)</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10B981', /* Verde mais vibrante para sucesso e ganhos */
+                        secondary: '#1F2937', /* Tom escuro para contraste */
+                        accent: '#3B82F6', /* Azul para destaque e confiança */
+                        whatsapp: '#25D366'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
     <style>
+        /* Ajustes para um visual "pequenininho" */
         body {
-            font-family: 'Montserrat', sans-serif;
-            /* Desabilita a seleção de texto e o menu de contexto */
-            -webkit-user-select: none;  /* Safari */
-            -moz-user-select: none;     /* Firefox */
-            -ms-user-select: none;      /* Internet Explorer/Edge */
-            user-select: none;          /* Padrão */
-            -webkit-touch-callout: none; /* Desabilita o menu de contexto em iOS */
+            font-size: 0.875rem; /* Base text-sm */
         }
-        /* Ajuste de cor principal para o hero para um tom premium */
-        .bg-hero-gradient {
-            background: linear-gradient(135deg, #0056b3 0%, #003a7a 100%);
+        h1 {
+            font-size: 1.35rem !important; /* md:text-3xl para o h1 */
+            line-height: 1.1;
         }
-        /* Estilo para a imagem de perfil */
-        .profile-img {
-            width: 48px; /* w-12 no tailwind */
-            height: 48px; /* h-12 no tailwind */
-            border-radius: 50%;
+        h2 {
+            font-size: 1.25rem !important; /* md:text-2xl para o h2 */
+        }
+        h3 {
+            font-size: 1.125rem !important; /* text-lg para o h3 */
+        }
+        p {
+            font-size: 0.9375rem; /* Um pouco menor que o padrão */
+        }
+
+        .hero-image {
+            /* Substitua 'SEU_LINK_DA_IMAGEM_AQUI' por uma imagem relevante de apostas/ganhos */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('logo4.webp');
+            background-size: cover;
+            background-position: center;
+            border-radius: 0.75rem; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            height: 180px; /* Altura menor para a imagem principal */
+            margin-left: auto; /* Garante que a imagem se centre se o contêiner for text-left */
+            margin-right: auto;
+        }
+        
+        .testimonial-image {
+            width: 80px; /* Tamanho ainda menor para as imagens dos testemunhos */
+            height: 80px;
             object-fit: cover;
-            margin-right: 0.75rem; /* mr-3 no tailwind */
-            border: 2px solid #a7a7a7; /* Borda sutil para destaque */
+            border-radius: 2px;
+            flex-shrink: 0;
+            border: 2px solid #10B981; /* Borda mais fina */
         }
+
+        .testimonials-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 16px; /* Espaçamento menor */
+            padding-bottom: 12px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .testimonials-container > * {
+            scroll-snap-align: start;
+        }
+
+        /* Estilização do scrollbar (Webkit) - Mantida para clareza, mas ajustada para ser mais fina */
+        .testimonials-container::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .testimonials-container::-webkit-scrollbar-track {
+            background: #E5E7EB;
+            border-radius: 6px;
+        }
+
+        .testimonials-container::-webkit-scrollbar-thumb {
+            background-color: #10B981;
+            border-radius: 6px;
+            border: 1px solid #E5E7EB;
+        }
+
+        /* Ajustes de padding e margin gerais para compactação */
+        .py-16 { padding-top: 3rem; padding-bottom: 3rem; } /* py-12 */
+        .md\:py-24 { padding-top: 4rem; padding-bottom: 4rem; } /* md:py-16 */
+        .mb-16 { margin-bottom: 3rem; } /* mb-12 */
+        .mb-10 { margin-bottom: 2rem; } /* mb-8 */
+        .py-4 { padding-top: 0.75rem; padding-bottom: 0.75rem; } /* py-3 */
+        .px-10 { padding-left: 1.5rem; padding-right: 1.5rem; } /* px-6 */
+        .rounded-full { border-radius: 9999px; } /* mantido */
+        .shadow-lg { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); } /* shadow-md */
+        .text-lg { font-size: 0.875rem; } /* text-base */
+        .w-16 { width: 3rem; } /* w-12 */
+        .h-16 { height: 3rem; } /* h-12 */
+        .text-3xl { font-size: 1.875rem; } /* text-2xl */
+        .text-4xl { font-size: 2.25rem; } /* text-3xl */
+        .p-8 { padding: 1.5rem; } /* p-6 */
     </style>
 </head>
-<body class="text-gray-800 leading-normal antialiased">
+<body class="bg-gray-50 font-sans text-gray-800">
+    <header class="max-w-7xl mx-auto px-4 py-12 md:py-16">
+        <div class="text-center"> <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 leading-tight">
+                Domine as Apostas Online com o <span class="text-primary">Método Expert</span> para Iniciantes!
+            </h1>
+            
+            <p class="text-base text-gray-600 max-w-2xl mx-auto mb-6 text-left"> Seja bem-vindo(a)! Se você está começando no mundo das apostas online, chegou ao lugar certo.
+                Descubra nosso método **100% Funcional** que te dará as bases para apostar com inteligência e responsabilidade.
+            </p>
 
-    <header class="bg-hero-gradient text-white text-center py-12 px-2 relative overflow-hidden">
-        <div class="container mx-auto max-w-3xl">
-            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 leading-tight">Método comprovado para Apostas online: Receba <strong class="text-yellow-300 animate-pulse">2 Bilhetes de Palpites Vencedores Diariamente</strong> e Conquiste <strong class="text-yellow-300">Lucros diariamente!</strong></h1>
-            <p class="text-base sm:text-lg font-normal mb-6 opacity-90">Interrompa as incertezas! Nosso método exclusivo fornece apostas prontas, otimizadas por especialistas, para que você possa lucrar no mundo das apostas online.</p>
-            <div class="flex justify-center">
-                <a href="https://chat.whatsapp.com/JCDcstdnA4REMftGaUcgox" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2.5 px-5 rounded-full text-base transition duration-300 ease-in-out shadow-sm hover:shadow-md transform hover:-translate-y-0.5">Entrar no grupo de palpites</a>
-            </div>
+            <div class="hero-image w-full h-48 md:h-64 rounded-lg shadow-md mb-8 mx-auto"></div> <button class="bg-primary hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105 text-base">
+                Quero Acessar o Método usando Assistente online!
+                <i class="fas fa-arrow-right ml-2"></i>
+            </button>
         </div>
     </header>
 
-    
-
-    <section class="py-10 px-2 text-center bg-gray-50">
-        <div class="container mx-auto max-w-3xl">
-            <h2 class="text-xl sm:text-2xl font-bold text-blue-700 mb-8">Diga Adeus às Perdas. Conquiste Seus <strong class="text-green-600">Lucros!</strong></h2>
-            <div class="flex flex-wrap justify-center gap-4 mt-6">
-                <div class="bg-white rounded-lg shadow-xs p-5 w-full max-w-xs text-left">
-                    <h3 class="text-lg font-bold mb-2 flex items-center text-red-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-1.5">
-                            <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-2.72 2.72a.75.75 0 1 0 1.06 1.06L12 13.06l2.72 2.72a.75.75 0 1 0 1.06-1.06L13.06 12l2.72-2.72a.75.75 0 0 0-1.06-1.06L12 10.94l-2.72-2.72Z" clip-rule="evenodd" />
-                        </svg>
-                        O Problema:
-                    </h3>
-                    <p class="text-sm text-gray-700">A maioria dos apostadores enfrenta **perdas constantes** e a frustração de não ter tempo ou conhecimento para analisar os jogos.</p>
-                </div>
-                <div class="bg-white rounded-lg shadow-xs p-5 w-full max-w-xs text-left">
-                    <h3 class="text-lg font-bold mb-2 flex items-center text-green-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-1.5">
-                            <path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 0 1 4.5-4.5h.75a.75.75 0 0 0 0-1.5H12a6 6 0 0 0-6 6v.75a.75.75 0 0 0 1.5 0V12Zm12-4.5H12A4.5 4.5 0 0 1 7.5 12v.75a.75.75 0 0 0 1.5 0V12a3 3 0 0 0 3-3h.75a.75.75 0 0 0 0-1.5ZM12 18a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V18a.75.75 0 0 1 .75-.75ZM18.94 6.06a.75.75 0 0 0-1.06-1.06l-1.97 1.97a.75.75 0 1 0 1.06 1.06l1.97-1.97ZM8.06 17.94a.75.75 0 0 0-1.06 1.06l1.97 1.97a.75.75 0 0 0 1.06-1.06l-1.97-1.97ZM19.695 18.945a.75.75 0 0 0 1.06-1.06l-1.97-1.97a.75.75 0 0 0-1.06 1.06l1.97 1.97ZM4.305 5.055a.75.75 0 0 0-1.06-1.06l-1.97 1.97a.75.75 0 0 0 1.06 1.06l1.97-1.97Z" />
-                        </svg>
-                        A Solução:
-                    </h3>
-                    <p class="text-sm text-gray-700">Nosso grupo oferece a solução: **palpites prontos e estratégicos**, elaborados por especialistas, eliminando o stress e aumentando significativamente suas chances de ganho.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    
-
-    <section class="bg-gray-800 text-white py-12 px-2 text-center">
-        <div class="container mx-auto max-w-3xl">
-            <h2 class="text-xl sm:text-2xl font-bold text-white mb-6">Apresentamos o Método Que <strong class="text-yellow-300">Transforma o Jogo!</strong></h2>
-            <p class="max-w-xl mx-auto text-base mb-8 opacity-90">Descubra um método comprovado para apostas com palpites online. Oferecemos <strong class="text-yellow-300">2 bilhetes de palpites prontos e exclusivos por dia</strong>, entregues diretamente no seu grupo watsapp. Nossas análises de especialistas maximizam suas chances de sucesso, tornando suas apostas mais inteligentes e lucrativas.</p>
-            <p class="max-w-xl mx-auto text-base mb-10 opacity-90">Esta é a sua oportunidade de aceder ao conhecimento de quem realmente domina o setor e começar a observar resultados!</p>
-            <div class="flex justify-center">
-                <a href="https://chat.whatsapp.com/JCDcstdnA4REMftGaUcgox" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2.5 px-5 rounded-full text-base transition duration-300 ease-in-out shadow-sm hover:shadow-md transform hover:-translate-y-0.5">Entrar no grupo de palpites!</a>
-            </div>
-        </div>
-    </section>
-
-    
-
-    <section class="py-10 px-2 text-center bg-gray-50">
-        <div class="container mx-auto max-w-3xl">
-            <h2 class="text-xl sm:text-2xl font-bold text-blue-700 mb-8"><strong class="text-green-600">Testemunhos de Sucesso</strong> - Veja o que os nossos membros estão a alcançar:</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-                <div class="bg-white rounded-lg shadow-xs p-4 text-left flex flex-col items-start">
-                    <div class="flex items-center mb-2">
-                        <img src="perfil1.jpg" alt="Foto de perfil de João S." class="profile-img">
-                        <div class="font-semibold text-blue-600 text-xs">Juma Taquale.</div>
+    <section class="bg-white py-12 md:py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-12 text-center"> Veja como o <span class="text-primary">Método Funciona</span> em 3 Passos Simples
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-start text-left transition duration-300 hover:scale-105 hover:shadow-xl border-t-2 border-primary">
+                    <div class="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center mb-4 text-primary border border-primary">
+                        <span class="text-2xl font-extrabold">1</span>
                     </div>
-                    <p class="italic text-sm text-gray-700 mb-2">"Finalmente a lucrar! Cansado de perder dinheiro, encontrei este grupo e os meus resultados mudaram drasticamente. Os palpites são precisos e as explicações excelentes!"</p>
-                </div>
-                <div class="bg-white rounded-lg shadow-xs p-4 text-left flex flex-col items-start">
-                    <div class="flex items-center mb-2">
-                        <img src="perfil2.jpg" alt="Foto de perfil de Maria P." class="profile-img">
-                        <div class="font-semibold text-blue-600 text-xs">Mário sawale.</div>
-                    </div>
-                    <p class="italic text-sm text-gray-700 mb-2">"Incrível! Com os palpites prontos, consigo apostar e ganhar. Recomendo para quem quer parar de apostar aleatoriamente e começar a ganhar de verdade."</p>
-                </div>
-                <div class="bg-white rounded-lg shadow-xs p-4 text-left flex flex-col items-start">
-                    <div class="flex items-center mb-2">
-                        <img src="perfil3.jpg" alt="Foto de perfil de Carlos D." class="profile-img">
-                        <div class="font-semibold text-blue-600 text-xs">Bandulo fastudo.</div>
-                    </div>
-                    <p class="italic text-sm text-gray-700 mb-2">"Confiança total! Já testei vários métodos e este é o único que me trouxe resultados consistentes. mas tem vezes que falha, mesmo assim eu gosto deste grupo é muito ativo."</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    
-
-    <section class="bg-gray-100 py-10 px-2 text-center">
-        <div class="container mx-auto max-w-3xl">
-            <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-8">Não Perca Mais Tempo! Comece a Lucrar Hoje!</h2>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="https://chat.whatsapp.com/JCDcstdnA4REMftGaUcgox" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 px-5 rounded-full text-base transition duration-300 ease-in-out shadow-sm hover:shadow-md transform hover:-translate-y-0.5 w-full sm:w-auto">Entrar no grupo de palpites</a>
-                <a href="https://wa.link/6y8hrf" class="bg-white border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-bold py-2.5 px-5 rounded-full text-base transition duration-300 ease-in-out shadow-sm hover:shadow-md transform hover:-translate-y-0.5 w-full sm:w-auto">Entrar em contacto com o especialista no watsapp!</a>
-            </div>
-        </div>
-    </section>
-
-    
-
-    <section class="bg-gradient-to-br from-blue-50 to-blue-100 py-10 px-2 text-center">
-        <div class="container mx-auto max-w-3xl">
-            <h2 class="text-xl sm:text-2xl font-bold text-blue-700 mb-8">O Que Você Ganha ao Entrar:</h2>
-            <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-6 list-none p-0 text-left">
-                <li class="bg-white p-4 rounded-lg shadow-xs flex items-center text-sm font-semibold text-gray-800">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-green-500 mr-2">
-                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6a.75.75 0 0 0 .44 0.684l3 2.25a.75.75 0 1 0 .91-1.218L12.75 11.69V6Z" clip-rule="evenodd" />
-                    </svg>
-                    **Economia de tempo** em análises complexas e demoradas.
-                </li>
-                <li class="bg-white p-4 rounded-lg shadow-xs flex items-center text-sm font-semibold text-gray-800">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-green-500 mr-2">
-                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM0 1.5a8.25 8.25 0 1 0 0 16.5 8.25 8.25 0 0 0 0-16.5ZM12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5Zm0 1.5a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" clip-rule="evenodd" />
-                    </svg>
-                    **Aumento significativo das chances de acerto** nas suas apostas.
-                </li>
-                <li class="bg-white p-4 rounded-lg shadow-xs flex items-center text-sm font-semibold text-gray-800">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-green-500 mr-2">
-                        <path d="M11.25 4.533A9.752 9.752 0 0 0 5.25 3a9.771 9.771 0 0 0-1.5.156v15.75c0 .355.118.694.334.976L6.75 21l-1.5 1.5H21L17.25 18l1.5-1.5h-2.25a.75.75 0 0 0-.75.75v.525A9.75 9.75 0 0 0 12 21.75a9.75 9.75 0 0 0 6.75-2.775v-1.996l1.5-1.5v-2.25l-1.5-1.5V9.75a.75.75 0 0 0-.75-.75h-2.25l1.5-1.5V5.25A9.771 9.771 0 0 0 18 3a9.752 9.752 0 0 0-6.75 1.533Z" />
-                    </svg>
-                    Acesso a **conhecimento especializado** e estratégico de apostadores profissionais.
-                </li>
-                <li class="bg-white p-4 rounded-lg shadow-xs flex items-center text-sm font-semibold text-gray-800">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-green-500 mr-2">
-                        <path fill-rule="evenodd" d="M1.5 5.625c0-1.036.84-1.875 1.875-1.875h17.25c1.035 0 1.875.84 1.875 1.875v12.75c0 1.035-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 0 1 1.5 18.375V5.625ZM16.5 4.5a.75.75 0 0 0 0 1.5h3c.414 0 .75-.336.75-.75V5.25a.75.75 0 0 0-.75-.75h-3ZM3 18.375V5.625c0-.83.67-1.5 1.5-1.5h15c.827 0 1.5.67 1.5 1.5v12.75c0 .828-.673 1.5-1.5 1.5H4.5c-.83 0-1.5-.672-1.5-1.5ZM5.25 6h13.5a.75.75 0 0 0 0-1.5H5.25a.75.75 0 0 0 0 1.5ZM6.75 18a.75.75 0 0 0 0-1.5h2.5a.75.75 0 0 0 0 1.5H6.75Z" clip-rule="evenodd" />
-                    </svg>
-                    Recebimento de **palpites diários** e consistentes, diretamente no seu telemóvel.
-                </li>
-                <li class="bg-white p-4 rounded-lg shadow-xs flex items-center text-sm font-semibold text-gray-800">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-green-500 mr-2">
-                        <path fill-rule="evenodd" d="M3 6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm4.5 9a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5a.75.75 0 0 1-.75-.75Zm.75-4.5a.75.75 0 0 0 0 1.5h5.5a.75.75 0 0 0 0-1.5h-5.5Z" clip-rule="evenodd" />
-                    </svg>
-                    **Potencial de lucros crescentes** e sustentáveis.
-                </li>
-                <li class="bg-white p-4 rounded-lg shadow-xs flex items-center text-sm font-semibold text-gray-800">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-green-500 mr-2">
-                        <path fill-rule="evenodd" d="M16.5 7.5a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V8.71L12.53 15.22a.75.75 0 1 1-1.06-1.06l6.19-6.19H16.5Z" clip-rule="evenodd" />
-                        <path fill-rule="evenodd" d="M2.25 13.5a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V14.29l-6.19 6.19a.75.75 0 1 1-1.06-1.06l6.19-6.19H7.5Z" clip-rule="evenodd" />
-                        <path fill-rule="evenodd" d="M12 2.25a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM4.5 12a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 0 1.5H5.25a.75.75 0 0 1-.75-.75ZM.75 18a.75.75 0 0 1-.75.75H.75a.75.75 0 0 1 0-1.5ZM18 12a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM12 21.75a.75.75 0 0 1-.75.75H3a.75.75 0 0 1-.75-.75v-2.25a.75.75 0 0 1 1.5 0v1.5h8.25a.75.75 0 0 1 0 1.5Z" clip-rule="evenodd" />
-                    </svg>
-                    Comunidade exclusiva para esclarecer dúvidas e trocar experiências.
-                </li>
-            </ul>
-        </div>
-    </section>
-
-    
-
-    <section class="py-10 px-2 bg-gray-50">
-        <div class="container mx-auto max-w-2xl">
-            <h2 class="text-xl sm:text-2xl font-bold text-blue-700 mb-8">Perguntas Frequentes (FAQ)</h2>
-            <div class="max-w-xl mx-auto">
-                <div class="bg-white rounded-lg shadow-xs mb-3">
-                    <div class="p-3 font-semibold text-base cursor-pointer flex justify-between items-center text-blue-600 faq-question">
-                        P: Qual a taxa de acerto dos palpites?
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 transform transition-transform duration-300">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                        </svg>
-                    </div>
-                    <div class="px-3 pb-3 text-gray-700 text-sm faq-answer hidden">
-                        R: A nossa taxa de acerto tem sido consistentemente acima de **80%**, baseada nos nossos resultados dos últimos 6 meses. Trabalhamos com análises profundas para garantir a maior probabilidade de sucesso.
+                    <h3 class="text-lg font-bold text-gray-900 mb-3">Abra sua Conta e Ganhe Bônus</h3>
+                    <p class="text-sm text-gray-600 mb-3 leading-relaxed">
+                        Comece abrindo sua conta através do nosso **link exclusivo**. Você receberá um **bônus generoso** no seu primeiro depósito de 200 MT ou mais, duplicando seu saldo inicial! Por exemplo, deposite 200 MT e comece com 400 MT!
+                    </p>
+                    <p class="text-xs font-medium text-red-500 mb-3">
+                        <i class="fas fa-exclamation-triangle mr-1"></i> Não esqueça de nos enviar o comprovante do seu primeiro depósito para validar o bônus!
+                    </p>
+                    <div class="text-primary text-3xl mt-auto">
+                        <i class="fas fa-money-check-alt"></i>
                     </div>
                 </div>
-                <div class="bg-white rounded-lg shadow-xs mb-3">
-                    <div class="p-3 font-semibold text-base cursor-pointer flex justify-between items-center text-blue-600 faq-question">
-                        P: Como funciona o acesso ao grupo?
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 transform transition-transform duration-300">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                        </svg>
+                
+                <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-start text-left transition duration-300 hover:scale-105 hover:shadow-xl border-t-2 border-primary">
+                    <div class="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center mb-4 text-primary border border-primary">
+                        <span class="text-2xl font-extrabold">2</span>
                     </div>
-                    <div class="px-3 pb-3 text-gray-700 text-sm faq-answer hidden">
-                        R: É muito simples! Após clicar no botão "Aceder ao Grupo", será direcionado para o nosso grupo WhatsApp e poderá começar a receber os palpites imediatamente.
+                    <h3 class="text-lg font-bold text-gray-900 mb-3">Aprenda as Estratégias do Método Expert</h3>
+                    <p class="text-sm text-gray-600 mb-3 leading-relaxed">
+                        Nosso método revela **estratégias comprovadas** para você apostar de forma inteligente e lucrativa. Inclui uma técnica diária de "Palpites de Jogos Desportivos" que leva apenas **5 minutos** para aplicar, com análises prontas para você!
+                    </p>
+                    <div class="text-primary text-3xl mt-auto">
+                        <i class="fas fa-brain"></i>
                     </div>
                 </div>
-                <div class="bg-white rounded-lg shadow-xs mb-3">
-                    <div class="p-3 font-semibold text-base cursor-pointer flex justify-between items-center text-blue-600 faq-question">
-                        P: É necessário ter experiência prévia em apostas para participar?
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 transform transition-transform duration-300">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                        </svg>
+                
+                <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-start text-left transition duration-300 hover:scale-105 hover:shadow-xl border-t-2 border-primary">
+                    <div class="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center mb-4 text-primary border border-primary">
+                        <span class="text-2xl font-extrabold">3</span>
                     </div>
-                    <div class="px-3 pb-3 text-gray-700 text-sm faq-answer hidden">
-                        R: Não! O nosso método é ideal tanto para iniciantes quanto para apostadores experientes, pois os palpites já vêm prontos e claros. Você só precisa seguir as instruções e apostar.
+                    <h3 class="text-lg font-bold text-gray-900 mb-3">Aplique e Veja os Resultados!</h3>
+                    <p class="text-sm text-gray-600 mb-3 leading-relaxed">
+                        Com o método em mãos e a estratégia diária, você estará pronto para fazer suas apostas com confiança. Comece a ver os **resultados** e otimize seus ganhos desde o primeiro dia!
+                    </p>
+                    <div class="text-primary text-3xl mt-auto">
+                        <i class="fas fa-chart-line"></i>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    
-
-    <section class="bg-gradient-to-br from-blue-700 to-green-600 text-white py-12 px-2 text-center">
-        <div class="container mx-auto max-w-3xl">
-            <h2 class="text-xl sm:text-2xl font-bold text-white mb-6">A Sua Satisfação Garantida</h2>
-            <div class="flex flex-col items-center justify-center gap-4">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-16 h-16 text-white drop-shadow-sm">
-                    <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
-                </svg>
-                <p class="max-w-lg mx-auto text-base leading-relaxed opacity-90">Acreditamos plenamente no nosso método e na qualidade dos nossos palpites, garantindo a sua satisfação. O nosso compromisso é com o seu sucesso e lucratividade. Junte-se a nós sem riscos!</p>
+    <section class="py-12 bg-gray-50 md:py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center"> Pronto para <span class="text-primary">Transformar</span> Suas Apostas?
+            </h2>
+            <div class="flex flex-col md:flex-row justify-center gap-4"> <a href="SEU_LINK_DE_VALIDACAO_AQUI" target="_blank" class="bg-accent hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105 text-base flex items-center justify-center">
+                    <i class="fas fa-external-link-alt mr-2"></i> 
+                    Acessar Link de Cadastro e Bônus
+                </a>
+                
+                <a href="https://wa.me/SEU_NUMERO_DE_WHATSAPP_AQUI" target="_blank" class="bg-whatsapp hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105 text-base flex items-center justify-center">
+                    <i class="fab fa-whatsapp mr-2"></i> 
+                   Obter o método usando Whatsapp 
+                </a>
             </div>
         </div>
     </section>
 
-    
+    <section class="py-12 bg-white md:py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-12">
+                Quem Já Usa e Aprova o <span class="text-primary">Método Expert</span>
+            </h2>
+            
+            <div class="testimonials-container">
+                <img src="test1.webp" alt="Usuário Satisfeito 1" class="testimonial-image">
+                
+                <img src="test2.webp" alt="Usuário Satisfeito 2" class="testimonial-image">
 
-    <footer class="bg-gray-900 text-white py-6 px-2 text-center text-xs">
-        <div class="container mx-auto">
-            <div class="flex flex-wrap justify-center gap-x-4 mb-2">
-                <a href="#" class="text-white hover:text-yellow-400 transition duration-300">Termos de Uso</a>
-                <a href="#" class="text-white hover:text-yellow-400 transition duration-300">Política de Privacidade</a>
+                <img src="test3.webp" alt="Usuário Satisfeito 3" class="testimonial-image">
+
+                <img src="test4.webp" alt="Usuário Satisfeito 4" class="testimonial-image">
+
+                </div>
+        </div>
+    </section>
+
+    <footer class="bg-secondary text-white py-8 md:py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-6">
+                <div class="mb-4 md:mb-0 text-center md:text-left">
+                    <h3 class="text-xl font-bold text-primary">Método Expert</h3>
+                    <p class="text-gray-400 mt-1 text-sm">Do iniciante ao Expert em Apostas Online.</p>
+                </div>
+                
             </div>
-            <p>&copy; 2025 Apostas online. Todos os direitos reservados.</p>
-            <p class="mt-1 opacity-80">Contacto: chefim940@gmail.com</p>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-500 text-xs">
+                <p>&copy; 2025 Método Expert. Todos os direitos reservados. | Aposte com responsabilidade.</p>
+            </div>
         </div>
     </footer>
-
-    <script>
-        document.querySelectorAll('.faq-question').forEach(item => {
-            item.addEventListener('click', event => {
-                const answer = item.nextElementSibling;
-                const icon = item.querySelector('svg');
-                item.classList.toggle('active');
-                if (answer.classList.contains('hidden')) {
-                    answer.classList.remove('hidden');
-                    icon.classList.add('rotate-180');
-                } else {
-                    answer.classList.add('hidden');
-                    icon.classList.remove('rotate-180');
-                }
-            });
-        });
-
-        // Desabilita o clique direito
-        document.addEventListener('contextmenu', event => event.preventDefault());
-
-        // Desabilita a seleção de texto adicional (para navegadores que ainda permitem)
-        document.addEventListener('selectstart', event => event.preventDefault());
-
-        // Desabilita o arrasto de elementos
-        document.addEventListener('dragstart', event => event.preventDefault());
-
-        // Desabilita Ctrl+C (ou Cmd+C no Mac) para copiar
-        document.addEventListener('keydown', event => {
-            if ((event.ctrlKey || event.metaKey) && event.key === 'c') {
-                event.preventDefault();
-            }
-        });
-        // Desabilita Ctrl+X (ou Cmd+X no Mac) para recortar
-        document.addEventListener('keydown', event => {
-            if ((event.ctrlKey || event.metaKey) && event.key === 'x') {
-                event.preventDefault();
-            }
-        });
-        // Desabilita Ctrl+A (ou Cmd+A no Mac) para selecionar tudo
-        document.addEventListener('keydown', event => {
-            if ((event.ctrlKey || event.metaKey) && event.key === 'a') {
-                event.preventDefault();
-            }
-        });
-    </script>
-
 </body>
 </html>
