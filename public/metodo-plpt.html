@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://vjs.zencdn.net/8.5.2/video-js.css" rel="stylesheet" />
     <script>
         tailwind.config = {
             theme: {
@@ -30,7 +31,7 @@
             font-size: 0.75rem; /* Base text-sm */
             /* Desabilita seleção de texto e arrastar em todo o corpo */
             -webkit-user-select: none;  /* Safari */
-            -moz-user-select: none;     /* Firefox */
+            -moz-user-select: none;      /* Firefox */
             -ms-user-select: none;      /* Internet Explorer/Edge */
             user-select: none;          /* Standard */
             -webkit-touch-callout: none; /* iOS Safari */
@@ -75,6 +76,78 @@
             user-drag: none;
         }
         
+        /* Contêiner do vídeo para centralização e layout bonito */
+        .video-container {
+            position: relative;
+            width: 100%;
+            /* Largura máxima para que o vídeo não fique gigante em telas grandes */
+            max-width: 560px; /* Largura padrão para vídeos 16:9, ajuste se quiser menor/maior */
+            margin: 0 auto 1rem; /* Centraliza e adiciona espaço abaixo */
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Video.js para responsividade e proporção 16:9 */
+        .video-js {
+            width: 100% !important;
+            height: 0 !important; /* Reseta a altura para que o padding-bottom defina a proporção */
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio (9 / 16 * 100) */
+        }
+
+        /* Estilos para o botão de play grande do Video.js */
+        .vjs-big-play-button {
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            width: 4em !important;
+            height: 4em !important;
+            line-height: 4em !important;
+            font-size: 1.5em !important;
+            background-color: rgba(0, 0, 0, 0.5) !important;
+            border: none !important;
+        }
+
+        .vjs-big-play-button:hover {
+            background-color: rgba(0, 0, 0, 0.7) !important;
+        }
+
+        /* Estilos para a barra de controle do Video.js */
+        .vjs-control-bar {
+            background-color: rgba(0, 0, 0, 0.5) !important;
+            border-top: none !important;
+        }
+
+        /* Cores dos ícones e textos na barra de controle */
+        .vjs-play-control,
+        .vjs-mute-control,
+        .vjs-volume-control,
+        .vjs-time-controls,
+        .vjs-fullscreen-control {
+            color: white !important;
+        }
+
+        /* Cor da barra de progresso */
+        .vjs-progress-control {
+            color: #10B981 !important;
+        }
+
+        /* Fundo da barra de progresso */
+        .vjs-slider {
+            background: #555 !important;
+        }
+
+        /* Progresso de reprodução */
+        .vjs-play-progress {
+            background: #10B981 !important;
+        }
+
+        /* Progresso de carregamento (buffer) */
+        .vjs-load-progress {
+            background: rgba(255, 255, 255, 0.3) !important;
+        }
+
         .testimonial-image {
             width: 100px; /* Aumentando o tamanho das imagens dos testemunhos */
             height: 100px;
@@ -144,11 +217,29 @@
                 Descubra nosso método **100% Funcional** que te dará as bases para apostar com inteligência e responsabilidade.
             </p>
 
-            <div class="hero-image w-full h-48 md:h-64 rounded-lg shadow-md mb-8 mx-auto"></div>
+            <div class="video-container">
+                <video
+                    id="my-video"
+                    class="video-js vjs-default-skin"
+                    controls
+                    preload="auto"
+                    poster="poster.webp"
+                    data-setup='{"fluid": true}'
+                >
+                    <source src="video.mp4" type="video/mp4" />
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a
+                        web browser that
+                        <a href="https://videojs.com/html5-video-support/" target="_blank"
+                            >supports HTML5 video</a
+                        >
+                    </p>
+                </video>
+            </div>
             
-            <a href="/atendimento-guia-apostas" target="_blank" class="bg-primary hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105 btn-text-small inline-flex items-center justify-center">
-                Quero Acessar o Método usando Assistente online!
-                <i class="fas fa-arrow-right ml-2"></i>
+            <a href="https://wa.me/258870202842?text=Olá%20quero%20receber%20o%20Método%20plpt" target="_blank" class="bg-whatsapp hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105 btn-text-small inline-flex items-center justify-center">
+                <i class="fab fa-whatsapp mr-2"></i>
+                Obter o método usando Whatsapp
             </a>
         </div>
     </header>
@@ -256,7 +347,11 @@
         </div>
     </footer>
 
+    <script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
     <script>
+        // Inicializa o Video.js (se necessário, embora data-setup já faça isso)
+        videojs('my-video');
+
         // Desabilita o clique com o botão direito do mouse (context menu)
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
