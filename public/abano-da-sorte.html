@@ -1,0 +1,422 @@
+    <!-- Feito por Doso~SEO -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Abano da Sorte</title>
+    <!-- SEO Meta Tags -->
+  <meta name="description" content=" Novo Abano da sorte Movitel">
+  <meta name="keywords" content="abano da sorte, como abanar 2025, novo abano">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://abano-da-sorte.web.app">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:title" content="Novo Abano da sorte Movitel">
+  <meta property="og:description" content="Abane e ganhe recompensas cada dia">
+  <meta property="og:image" content="https://abano-da-sorte.web.app/logo.webp">
+  <meta property="og:url" content="https://abano-da-sorte.web.app">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_MZ">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Novo Abano da sorte Movitel">
+  <meta name="twitter:description" content="Ganhe prêmios ao girar a roleta da sorte Movitel">
+  <meta name="twitter:image" content="https://abano-da-sorte.web.app/logo.webp">
+  <!-- Caso possua um @Twitter, inclua-o abaixo -->
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://abano-da-sorte.web.app/logo.webp" type="image/x-icon">
+  
+  <style>
+    body {
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 10%);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      text-align: center;
+      margin: 0;
+      width: 100%;
+      height: 20%;
+      padding: 10px;
+      min-height: 0vh;
+      max-height: 100%;
+      align-items: center;
+    }
+
+    .header {
+      background: linear-gradient(90deg, #007BFF 0%, #0056b3 100%);
+      color: white;
+      padding: 0.1rem 0.8rem 0rem 0.8rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin: -20px -20px 30px;
+    }
+
+    .info-container {
+      background: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 20px auto;
+      max-width: 500px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .info-container:hover {
+      transform: translateY(-3px);
+    }
+
+    .container {
+      position: center;
+      padding: 0px;
+      display: inline-block;
+      filter: drop-shadow(0 10px 20px rgba(0,123,255,0.2));
+    }
+
+    canvas {
+      border: 4px solid white;
+      border-radius: 50%;
+      background: #fff;
+      width: 90vw;
+      height: 90vw;
+      max-width: 500px;
+      max-height: 500px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: transform 0.5s ease;
+    }
+
+    .pointer {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 40px solid #ff0000;
+      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+      z-index: 2;
+    }
+
+    #spinButton {
+      margin-top: 30px;
+      padding: 15px 40px;
+      background: linear-gradient(45deg, #007BFF 0%, #00c3ff 100%);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #spinButton:before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: rgba(255,255,255,0.1);
+      transform: rotate(45deg);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% { left: -50%; }
+      100% { left: 150%; }
+    }
+
+    #spinButton:hover:enabled {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,123,255,0.4);
+    }
+
+     .modal {
+      
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+    .modal-content {
+      background: #fff;
+      margin: 15% auto;
+      padding: 20px;
+      width: 300px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    @keyframes modalShow {
+      from { transform: translateY(-300px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .close {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      font-size: 28px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .countdown {
+      color: #28a745;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .social-proof {
+      margin: 20px 0;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 10px;
+    }
+
+    .referral-banner {
+      background: #fff3cd;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Abano da Sorte!</h1>
+    <p>Gire e ganhe premios</p>
+  </div>
+
+  <div class="info-container">
+    <div id="spinsInfo">🔑 Spins disponíveis: <span id="spinsCount">3</span></div>
+    <div class="countdown">⏳ Próximo spin grátis em: <span id="countdown">24:00:00</span></div>
+  </div>
+
+  <div class="container">
+    <canvas id="wheel" width="500" height="500"></canvas>
+    <div class="pointer"></div>
+  </div>
+
+  <button id="spinButton">GIRAR AGORA!</button>
+
+  <div class="social-proof">
+    🏆 <strong>1873 pessoas ganharam hoje!</strong> 
+  </div>
+
+  <div class="referral-banner">
+    📣 Indique amigos e ganhe spins extras! 
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 style="color: #007BFF; margin-top: 0;">PARABÉNS! 🎉</h2>
+      <p id="rewardMessage"></p>
+      <img src="logospin.webp" alt="Prêmio" style="width: 55%; margin: 15px 0;">
+      <div style="background: #e3f2fd; padding: 10px; border-radius: 10px;">
+        ⏳ Oferta válida por: <strong>24 horas</strong>
+      </div>
+      <button id="okButton" style="margin-top: 20px; width: 100%; padding: 15px; font-size: 1.2em; background: #fff; border-radius: 10px;">
+        Criar conta para Receber
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("wheel");
+    const ctx = canvas.getContext("2d");
+    const spinButton = document.getElementById("spinButton");
+    const modal = document.getElementById("modal");
+    const closeModal = document.querySelector(".close");
+    const rewardMessage = document.getElementById("rewardMessage");
+    const okButton = document.getElementById("okButton");
+    const spinsCountElement = document.getElementById("spinsCount");
+
+    let spinsAvailable = 3;
+    const rewards = [
+      "1GB",
+      "200MB",
+      "5 Minutos",
+      "10 Minutos",
+      "50MB",
+      "50SMS",
+      "2 Minutos",
+      "10GB",
+      "100SMS",
+      "500MB",
+      "Boa sorte da Proxima!"
+    ];
+    const colors = [
+      "#FF6384",
+      "#36A2EB",
+      "#FFCE56",
+      "#4BC0C0",
+      "#9966FF",
+      "#FF9F40",
+      "#8BC34A",
+      "#E53935",
+      "#FFCE56",
+      "#4BC0C0",
+      "#9966FF",
+      "#FF9F40"
+    ];
+
+    const numSegments = rewards.length;
+    const arcSize = (2 * Math.PI) / numSegments;
+    let startAngle = 0;
+    let spinAngle = 0;
+    let spinning = false;
+
+    function drawWheel() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < numSegments; i++) {
+        const angle = startAngle + i * arcSize;
+        ctx.beginPath();
+        ctx.fillStyle = colors[i % colors.length];
+        ctx.moveTo(250, 250);
+        ctx.arc(250, 250, 250, angle, angle + arcSize, false);
+        ctx.fill();
+        ctx.save();
+        ctx.fillStyle = "#fff";
+        ctx.translate(250, 250);
+        ctx.rotate(angle + arcSize / 2);
+        ctx.textAlign = "right";
+        ctx.font = "bold 18px Arial";
+        ctx.fillText(rewards[i], 230, 10);
+        ctx.restore();
+      }
+    }
+
+    function spin() {
+      if (spinning || spinsAvailable <= 0) return;
+      spinning = true;
+      spinButton.disabled = true;
+      spinsAvailable--;
+      spinsCountElement.textContent = spinsAvailable;
+
+      const extraSpins = Math.floor(Math.random() * 3) + 3;
+      const randomAngle = Math.random() * 2 * Math.PI;
+      const targetAngle = extraSpins * 2 * Math.PI + randomAngle;
+      const duration = 10000;
+      const startTime = performance.now();
+
+      function animate(now) {
+        const elapsed = now - startTime;
+        if (elapsed < duration) {
+          const progress = elapsed / duration;
+          const easedProgress = 1 - Math.pow(1 - progress, 2);
+          spinAngle = easedProgress * targetAngle;
+          startAngle = spinAngle;
+          drawWheel();
+          requestAnimationFrame(animate);
+        } else {
+          spinAngle = targetAngle;
+          startAngle = spinAngle;
+          drawWheel();
+          spinning = false;
+          spinButton.disabled = spinsAvailable <= 0;
+          determineReward();
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+    
+
+    function determineReward() {
+  // Normaliza o ângulo final da roda para ficar entre 0 e 2π
+  const normalizedAngle = startAngle % (2 * Math.PI);
+  // Calcula o ângulo em relação ao ponteiro (no topo, 3π/2)
+  const pointerAngle = (3 * Math.PI / 2 - normalizedAngle + 2 * Math.PI) % (2 * Math.PI);
+  // Determina o índice da recompensa com base no tamanho de cada segmento
+  const index = Math.floor(pointerAngle / arcSize);
+  rewardMessage.textContent = `Você ganhou: ${rewards[index]}!`;
+  modal.style.display = "block";
+}
+
+
+    // Event Listeners
+    spinButton.addEventListener("click", spin);
+    closeModal.addEventListener("click", () => modal.style.display = "none");
+    okButton.addEventListener("click", () => {
+      modal.style.display = "none";
+      window.open("https://media1.placard.co.mz/redirect.aspx?pid=5905&bid=1690", "_blank");
+    });
+    window.addEventListener("click", (event) => {
+      
+    });
+
+    // Countdown Timer
+    function startCountdown() {
+      let time = 86400;
+      const countdownElement = document.getElementById("countdown");
+      setInterval(() => {
+        time--;
+        const hours = Math.floor(time / 3600);
+        const minutes = Math.floor((time % 3600) / 60);
+        const seconds = time % 60;
+        countdownElement.textContent = 
+          `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    // Initial Setup
+    drawWheel();
+    startCountdown();
+    const sound1 = new Audio("lucky_spin.mp3");
+    sound1.preload = "auto";
+    const sound2 = new Audio("lucky_done.mp3");
+    sound2.preload = "auto";
+
+    let isPlaying = false; // Para evitar múltiplas execuções simultâneas
+
+    document.getElementById("spinButton").addEventListener("click", async () => {
+      if (isPlaying) return; // Evita múltiplas execuções
+      isPlaying = true;
+
+      // Defina a duração de cada som (em milissegundos)
+      const duration1 = 10000; // 5 segundos para o primeiro som
+      const duration2 = 4000; // 4 segundos para o segundo som
+
+      try {
+        // Toca o primeiro som
+        await sound1.play();
+      } catch (err) {
+        console.error("Erro ao reproduzir o primeiro som:", err);
+      }
+
+      // Após o tempo definido, interrompe o primeiro som e inicia o segundo
+      setTimeout(async () => {
+        sound1.pause();
+        sound1.currentTime = 0; // Reinicia o áudio
+
+        try {
+          // Toca o segundo som
+          await sound2.play();
+        } catch (err) {
+          console.error("Erro ao reproduzir o segundo som:", err);
+        }
+
+        // Após o tempo definido, interrompe o segundo som e libera a possibilidade de novo clique
+        setTimeout(() => {
+          sound2.pause();
+          sound2.currentTime = 0; // Reinicia o áudio
+          isPlaying = false;
+        }, duration2);
+
+      }, duration1);
+    });
+  </script>
+</body>
+</html>
+<!-- Feito por Doso~SEO -->
